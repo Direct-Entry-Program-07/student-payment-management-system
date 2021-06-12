@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="820.0" prefWidth="1440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeFormController">
+   <children>
+      <TableView fx:id="tblDashboard" layoutX="25.0" layoutY="253.0" prefHeight="523.0" prefWidth="1390.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+        <columns>
+          <TableColumn minWidth="0.0" prefWidth="341.0" text="CourseID" />
+          <TableColumn minWidth="0.0" prefWidth="318.0" text="New Registrations" />
+            <TableColumn prefWidth="341.0" text="Number of Payments" />
+            <TableColumn prefWidth="389.0" text="Total Income" />
+        </columns>
+      </TableView>
+      <Label layoutX="25.0" layoutY="34.0" text="Date:" />
+      <Label layoutX="1238.0" layoutY="42.0" prefHeight="16.0" prefWidth="44.0" text="Time:" />
+      <Label fx:id="lbl" layoutX="81.0" layoutY="34.0" text="2000-01-01" />
+      <Label alignment="CENTER_RIGHT" layoutX="1293.0" layoutY="42.0" prefHeight="16.0" prefWidth="109.0" text="00:00:00" textAlignment="JUSTIFY" />
+      <Label layoutX="45.0" layoutY="81.0" text="Filter By:" />
+      <Label layoutX="43.0" layoutY="137.0" text="Date:" />
+      <Label layoutX="471.0" layoutY="137.0" text="Course ID" />
+      <JFXDatePicker defaultColor="#81d4fa" layoutX="104.0" layoutY="132.0" prefHeight="26.0" prefWidth="275.0" promptText="Select a Date to search" />
+      <TextField layoutX="566.0" layoutY="132.0" prefHeight="26.0" prefWidth="293.0" />
+      <HBox layoutX="25.0" layoutY="721.0" prefHeight="77.0" prefWidth="1390.0" spacing="60.0">
+         <children>
+            <JFXButton fx:id="btnManageStudents" onAction="#btnManageStudents_OnAction" onKeyReleased="#btnManageStudents_OnKeyReleased" prefHeight="64.0" prefWidth="230.0" style="-fx-background-color: #B3E5FC;" text="Manage Students">
+               <HBox.margin>
+                  <Insets top="7.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnManageCourses" onAction="#btnManageCourses_OnAction" onKeyReleased="#btnManageCourses_OnKeyReleased" prefHeight="64.0" prefWidth="230.0" style="-fx-background-color: #B3E5FC;" text="Manage Courses">
+               <HBox.margin>
+                  <Insets top="7.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnManagePayments" onAction="#btnManagePayments_OnAction" onKeyReleased="#btnManagePayments_OnKyeReleased" prefHeight="64.0" prefWidth="230.0" style="-fx-background-color: #B3E5FC;" text="Manage Payments">
+               <HBox.margin>
+                  <Insets top="7.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnManageUsers" onAction="#btnManageUsers_OnAction" onKeyReleased="#btnManageUsers_OnKeyReleased" prefHeight="64.0" prefWidth="230.0" style="-fx-background-color: #B3E5FC;" text="Manage Users">
+               <HBox.margin>
+                  <Insets top="7.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnViewPayments" onAction="#btnViewPayments_OnAction" onKeyReleased="#btnViewPayments_OnKeyReleased" prefHeight="64.0" prefWidth="230.0" style="-fx-background-color: #B3E5FC;" text="View Payments">
+               <HBox.margin>
+                  <Insets top="7.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
