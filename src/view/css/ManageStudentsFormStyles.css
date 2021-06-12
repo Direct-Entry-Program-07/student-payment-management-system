@@ -1,0 +1,25 @@
+#tblStudents .column-header{
+    -fx-background-color: #B3E5FC;
+    -fx-size: 60px;
+    -fx-font-family: "Ubuntu";
+    -fx-font-size: 18px;
+}
+
+#tblStudents .table-row-cell:empty{
+    -fx-background-color: white;
+}
+
+#tblStudents{
+    -fx-border-color: rgba(0,0,0,0.2);
+    -fx-background-insets: 0px, 0px;
+    -fx-padding: 0;
+}
+
+#tblStudents .cell{
+    -fx-cell-size: 60px;
+    -fx-wrap-text: true;
+}
+
+#tblStudents .table-cell:empty{
+    -fx-border-color: transparent;
+}

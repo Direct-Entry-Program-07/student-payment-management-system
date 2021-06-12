@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="820.0" prefWidth="1440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeFormController">
+<AnchorPane prefHeight="820.0" prefWidth="1440.0" style="-fx-background-color: white;" stylesheets="@css/DashboardFormStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeFormController">
    <children>
       <TableView fx:id="tblDashboard" layoutX="25.0" layoutY="253.0" prefHeight="523.0" prefWidth="1390.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
         <columns>
@@ -21,15 +21,10 @@
             <TableColumn prefWidth="389.0" text="Total Income" />
         </columns>
       </TableView>
-      <Label layoutX="25.0" layoutY="34.0" text="Date:" />
-      <Label layoutX="1238.0" layoutY="42.0" prefHeight="16.0" prefWidth="44.0" text="Time:" />
-      <Label fx:id="lbl" layoutX="81.0" layoutY="34.0" text="2000-01-01" />
-      <Label alignment="CENTER_RIGHT" layoutX="1293.0" layoutY="42.0" prefHeight="16.0" prefWidth="109.0" text="00:00:00" textAlignment="JUSTIFY" />
-      <Label layoutX="45.0" layoutY="81.0" text="Filter By:" />
-      <Label layoutX="43.0" layoutY="137.0" text="Date:" />
-      <Label layoutX="471.0" layoutY="137.0" text="Course ID" />
-      <JFXDatePicker defaultColor="#81d4fa" layoutX="104.0" layoutY="132.0" prefHeight="26.0" prefWidth="275.0" promptText="Select a Date to search" />
-      <TextField layoutX="566.0" layoutY="132.0" prefHeight="26.0" prefWidth="293.0" />
+      <Label layoutX="27.0" layoutY="63.0" text="Date:" />
+      <Label layoutX="1240.0" layoutY="71.0" prefHeight="16.0" prefWidth="44.0" text="Time:" />
+      <Label fx:id="lblDate" layoutX="83.0" layoutY="63.0" text="2000-01-01" />
+      <Label alignment="CENTER_RIGHT" layoutX="1301.0" layoutY="71.0" prefHeight="16.0" prefWidth="109.0" text="00:00:00" textAlignment="JUSTIFY" />
       <HBox layoutX="25.0" layoutY="721.0" prefHeight="77.0" prefWidth="1390.0" spacing="60.0">
          <children>
             <JFXButton fx:id="btnManageStudents" onAction="#btnManageStudents_OnAction" onKeyReleased="#btnManageStudents_OnKeyReleased" prefHeight="64.0" prefWidth="230.0" style="-fx-background-color: #B3E5FC;" text="Manage Students">
@@ -74,5 +69,31 @@
             </JFXButton>
          </children>
       </HBox>
+      <HBox layoutX="25.0" layoutY="96.0" prefHeight="70.0" prefWidth="1390.0" spacing="100.0">
+         <children>
+            <AnchorPane prefHeight="70.0" prefWidth="500.0">
+               <children>
+                  <JFXDatePicker fx:id="pckrDate" accessibleText="Search using a Date" defaultColor="#81d4fa" prefHeight="48.0" prefWidth="502.0" promptText="Select a Date to search" AnchorPane.topAnchor="10.0" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </AnchorPane>
+            <AnchorPane prefHeight="70.0" prefWidth="788.0">
+               <children>
+                  <TextField fx:id="txtQuery" accessibleText="Search using CourseID" prefHeight="48.0" prefWidth="716.0" promptText="Eg: DEP" style="-fx-background-color: white;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <Label layoutX="604.0" layoutY="20.0" text="DASHBOARD">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

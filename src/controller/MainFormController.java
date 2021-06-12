@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -32,15 +31,19 @@ public class MainFormController {
     private AppBarIcon icon = AppBarIcon.NAV_ICON_NONE;
     private NavActionListener navActionListener = null;
 
-    public void initialize(){
+    public void initialize() {
 
         initWindow();
     }
 
     public void navigate(String title, String url, AppBarIcon icon){
+        navigate(title, url, icon, null);
+    }
+
+
+    public void navigate(String title, String url, AppBarIcon icon, NavActionListener navActionListener) {
 
         try {
-
             imgNav.setVisible(true);
             this.icon = icon;
             this.navActionListener = navActionListener;
@@ -78,7 +81,7 @@ public class MainFormController {
             ft.play();
             lblTitle.setText(title);
 
-            Platform.runLater(()->{
+            Platform.runLater(() -> {
                 primaryStage.sizeToScene();
                 primaryStage.centerOnScreen();
             });
@@ -92,7 +95,7 @@ public class MainFormController {
         imgNav.setVisible(false);
 
         Platform.runLater(() -> {
-            lblTitle.setText(((Stage)(imgClose.getScene().getWindow())).getTitle());
+            lblTitle.setText(((Stage) (imgClose.getScene().getWindow())).getTitle());
         });
 
         pneAppBar.setOnMousePressed(event -> {
@@ -111,9 +114,9 @@ public class MainFormController {
         imgNav.setOnMouseEntered(event -> swapNavIcon());
         imgNav.setOnMouseExited(event -> swapNavIcon());
         imgNav.setOnMouseClicked(event -> {
-            /*if (navActionListener != null) {
+            if (navActionListener != null) {
                 navActionListener.handle();
-            }*/
+            }
         });
 
         imgClose.setOnMouseEntered(event -> imgClose.setImage(new Image("/view/assets/icons/close-hover.png")));
@@ -127,10 +130,10 @@ public class MainFormController {
     }
 
     private void swapNavIcon() {
-       /* if (icon != AppBarIcon.NAV_ICON_NONE && navActionListener != null) {
+        if (icon != AppBarIcon.NAV_ICON_NONE && navActionListener != null) {
             Image temp = imgNav.getImage();
             imgNav.setImage((Image) imgNav.getUserData());
             imgNav.setUserData(temp);
-        }*/
+        }
     }
 }
