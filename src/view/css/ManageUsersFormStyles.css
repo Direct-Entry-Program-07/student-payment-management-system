@@ -1,26 +1,26 @@
-#tblPayments .column-header{
+#tblUsers .column-header{
     -fx-background-color: #B3E5FC;
     -fx-size: 60px;
     -fx-font-family: "Ubuntu";
     -fx-font-size: 18px;
 }
 
-#tblPayments .table-row-cell:empty{
+#tblUsers .table-row-cell:empty{
     -fx-background-color: white;
 }
 
-#tblPayments{
+#tblUsers{
     -fx-border-color: rgba(0,0,0,0.2);
     -fx-background-insets: 0px, 0px;
     -fx-padding: 0;
 }
 
-#tblPayments .cell{
+#tblUsers .cell{
     -fx-cell-size: 60px;
     -fx-wrap-text: true;
 }
 
-#tblPayments .table-cell:empty{
+#tblUsers .table-cell:empty{
     -fx-border-color: transparent;
 }
 

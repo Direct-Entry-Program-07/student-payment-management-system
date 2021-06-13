@@ -48,12 +48,14 @@ public class HomeFormController {
     }
 
     public void btnManageUsers_OnAction(ActionEvent actionEvent) {
+        navigate("Manage Users", "/view/ManageUsersForm.fxml");
     }
 
     public void btnManageUsers_OnKeyReleased(KeyEvent keyEvent) {
     }
 
     public void btnViewPayments_OnAction(ActionEvent actionEvent) {
+        navigate("View All Payments", "/view/ViewAllPaymentsForm.fxml");
     }
 
     public void btnViewPayments_OnKeyReleased(KeyEvent keyEvent) {

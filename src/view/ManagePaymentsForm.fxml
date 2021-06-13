@@ -15,14 +15,14 @@
             <children>
                 <AnchorPane prefHeight="70.0" prefWidth="1099.0">
                     <children>
-                        <TextField fx:id="txtQuery" accessibleText="Query" layoutY="20.0" prefHeight="50.0" prefWidth="1173.0" promptText="Eg: Course name, BatchID, Course ID" style="-fx-background-color: white;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                        <TextField fx:id="txtQuery" accessibleText="Query" layoutY="20.0" prefHeight="50.0" prefWidth="1173.0" promptText="Eg: NIC, Student Name, Course name" style="-fx-background-color: white;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </TextField>
                     </children>
                 </AnchorPane>
-                <JFXButton prefHeight="50.0" prefWidth="264.0" ripplerFill="#4fc3f7" style="-fx-background-color: #B3E5FC;" text="Add new Payment">
+                <JFXButton fx:id="btnAddPayment" onAction="#btnAddPayment_OnAction" prefHeight="50.0" prefWidth="264.0" ripplerFill="#4fc3f7" style="-fx-background-color: #B3E5FC;" text="Add new Payment">
                     <font>
                         <Font size="18.0" />
                     </font>

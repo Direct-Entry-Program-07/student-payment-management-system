@@ -22,7 +22,7 @@
                         </TextField>
                     </children>
                 </AnchorPane>
-                <JFXButton prefHeight="50.0" prefWidth="179.0" ripplerFill="#4fc3f7" style="-fx-background-color: #B3E5FC;" text="Add new Course">
+                <JFXButton fx:id="btnAddCourse" onAction="#btnAddCourse_OnAction" prefHeight="50.0" prefWidth="179.0" ripplerFill="#4fc3f7" style="-fx-background-color: #B3E5FC;" text="Add new Course">
                     <font>
                         <Font size="18.0" />
                     </font>
