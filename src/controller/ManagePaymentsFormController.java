@@ -21,7 +21,13 @@ public class ManagePaymentsFormController {
     public JFXButton btnAddPayment;
 
     public void initialize(){
+
         MaterialUI.paintTextFields(txtQuery);
+
+        tblPayments.getItems().add(new Object());
+        tblPayments.getItems().add(new Object());
+        tblPayments.getItems().add(new Object());
+        tblPayments.getItems().add(new Object());
     }
 
     public void btnAddPayment_OnAction(ActionEvent actionEvent) {

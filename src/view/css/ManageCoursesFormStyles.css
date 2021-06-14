@@ -1,5 +1,5 @@
 #tblCourses .column-header{
-    -fx-background-color: #B3E5FC;
+    -fx-background-color: #81D4FA;
     -fx-size: 60px;
     -fx-font-family: "Ubuntu";
     -fx-font-size: 18px;
@@ -22,6 +22,18 @@
 
 #tblCourses .table-cell:empty{
     -fx-border-color: transparent;
+}
+
+#tblCourses .table-row-cell:filled:hover{
+    -fx-background-color: rgba(129, 212, 250, 0.5);
+    -fx-background-insets: 0px 1px 0px 1px;
+    -fx-background-radius: 4px;
+}
+
+#tblCourses .table-row-cell:filled:selected{
+    -fx-background-color: rgba(201, 201, 201, 0.71);
+    -fx-background-insets: 0px 1px 0px 1px;
+    -fx-background-radius: 4px;
 }
 
 .button:hover{

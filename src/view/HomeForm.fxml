@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -18,8 +19,11 @@
           <TableColumn minWidth="0.0" prefWidth="341.0" text="CourseID" />
           <TableColumn minWidth="0.0" prefWidth="318.0" text="New Registrations" />
             <TableColumn prefWidth="341.0" text="Number of Payments" />
-            <TableColumn prefWidth="389.0" text="Total Income" />
+            <TableColumn prefWidth="388.0" text="Total Income" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <Label layoutX="27.0" layoutY="63.0" text="Date:" />
       <Label layoutX="1240.0" layoutY="71.0" prefHeight="16.0" prefWidth="44.0" text="Time:" />
@@ -73,7 +77,13 @@
          <children>
             <AnchorPane prefHeight="70.0" prefWidth="500.0">
                <children>
-                  <JFXDatePicker fx:id="pckrDate" accessibleText="Search using a Date" defaultColor="#81d4fa" prefHeight="48.0" prefWidth="502.0" promptText="Select a Date to search" AnchorPane.topAnchor="10.0" />
+                  <JFXDatePicker fx:id="pckrDate" accessibleText="Search using a Date" defaultColor="#81d4fa" prefHeight="48.0" prefWidth="502.0" promptText="Select a Date to search" AnchorPane.topAnchor="10.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor></JFXDatePicker>
                </children>
                <HBox.margin>
                   <Insets />

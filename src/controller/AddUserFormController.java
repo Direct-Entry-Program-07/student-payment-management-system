@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class AddStudentFormController {
+public class AddUserFormController {
     public JFXButton btnSave;
     public JFXButton btnCancel;
 

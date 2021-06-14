@@ -2,8 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -12,14 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" stylesheets="@css/SecondaryFormsStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCourseFormController">
+<AnchorPane prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" stylesheets="@css/SecondaryFormsStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddUserFormController">
     <children>
         <AnchorPane layoutX="18.0" layoutY="17.0" prefHeight="678.0" prefWidth="614.0" style="-fx-border-color: #81D4FA; -fx-border-radius: 10;" />
-        <VBox layoutX="24.0" layoutY="35.0" prefHeight="626.0" prefWidth="601.0" spacing="30.0">
+        <VBox layoutX="24.0" layoutY="35.0" prefHeight="484.0" prefWidth="601.0" spacing="30.0">
             <children>
                 <HBox prefHeight="44.0" prefWidth="621.0">
                     <children>
-                        <Label prefHeight="20.0" prefWidth="210.0" text="Student NIC:">
+                        <Label prefHeight="20.0" prefWidth="210.0" text="User ID:">
                             <HBox.margin>
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
@@ -27,7 +25,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 943245624V">
+                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: U003">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -39,7 +37,7 @@
                 </HBox>
                 <HBox prefHeight="44.0" prefWidth="621.0">
                     <children>
-                        <Label prefHeight="20.0" prefWidth="210.0" text="Student Name:">
+                        <Label prefHeight="20.0" prefWidth="210.0" text="User name:">
                             <HBox.margin>
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
@@ -47,7 +45,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: Jay John">
+                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: AmalJ">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -59,7 +57,7 @@
                 </HBox>
                 <HBox prefHeight="44.0" prefWidth="621.0">
                     <children>
-                        <Label prefHeight="20.0" prefWidth="210.0" text="Contact Number:">
+                        <Label prefHeight="20.0" prefWidth="210.0" text="Password:">
                             <HBox.margin>
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
@@ -67,7 +65,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 0742563248">
+                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: **************">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -96,7 +94,7 @@
                 </HBox>
                 <HBox prefHeight="44.0" prefWidth="621.0">
                     <children>
-                        <Label prefHeight="20.0" prefWidth="210.0" text="Date of Birth:">
+                        <Label prefHeight="20.0" prefWidth="210.0" text="Contact Number:">
                             <HBox.margin>
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
@@ -104,7 +102,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 1996-05-02">
+                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 091-2345678">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -132,43 +130,6 @@
                                 <Insets top="6.0" />
                             </HBox.margin>
                         </TextField>
-                    </children>
-                </HBox>
-                <HBox prefHeight="44.0" prefWidth="621.0">
-                    <children>
-                        <Label prefHeight="20.0" prefWidth="210.0" text="Course ID:">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets left="10.0" top="12.0" />
-                            </HBox.margin>
-                        </Label>
-                        <ComboBox prefHeight="32.0" prefWidth="375.0" promptText="DEP" style="-fx-background-color: #B3E5FC;">
-                            <HBox.margin>
-                                <Insets top="6.0" />
-                            </HBox.margin>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </ComboBox>
-                    </children>
-                </HBox>
-                <HBox prefHeight="44.0" prefWidth="621.0">
-                    <children>
-                        <Label prefHeight="20.0" prefWidth="210.0" text="Batch ID:">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets left="10.0" top="12.0" />
-                            </HBox.margin>
-                        </Label>
-                        <ComboBox prefHeight="32.0" prefWidth="375.0" promptText="7" style="-fx-background-color: #B3E5FC;">
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </ComboBox>
                     </children>
                 </HBox>
             </children>

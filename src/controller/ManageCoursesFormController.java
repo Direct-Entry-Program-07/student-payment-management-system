@@ -22,7 +22,13 @@ public class ManageCoursesFormController {
     public JFXButton btnAddCourse;
 
     public void initialize(){
+
         MaterialUI.paintTextFields(txtQuery);
+
+        tblCourses.getItems().add(new Object());
+        tblCourses.getItems().add(new Object());
+        tblCourses.getItems().add(new Object());
+        tblCourses.getItems().add(new Object());
     }
 
     public void btnAddCourse_OnAction(ActionEvent actionEvent) {

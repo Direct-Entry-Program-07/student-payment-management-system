@@ -23,7 +23,13 @@ public class HomeFormController {
     public TextField txtQuery;
 
     public void initialize(){
+
         MaterialUI.paintTextFields(txtQuery);
+
+        tblDashboard.getItems().add(new Object());
+        tblDashboard.getItems().add(new Object());
+        tblDashboard.getItems().add(new Object());
+        tblDashboard.getItems().add(new Object());
     }
 
     public void btnManageStudents_OnAction(ActionEvent actionEvent) {

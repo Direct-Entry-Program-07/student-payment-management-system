@@ -28,7 +28,13 @@ public class ManageStudentsFormController {
     }
 
     public void initialize(){
+
         MaterialUI.paintTextFields(txtQuery);
+
+        tblStudents.getItems().add(new Object());
+        tblStudents.getItems().add(new Object());
+        tblStudents.getItems().add(new Object());
+        tblStudents.getItems().add(new Object());
     }
 
     public void btnAddNewStudent_OnAction(ActionEvent actionEvent) {

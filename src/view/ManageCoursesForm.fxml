@@ -36,8 +36,8 @@
             <columns>
                 <TableColumn prefWidth="192.0" text="CourseID" />
                 <TableColumn prefWidth="139.0" text="Course Name" />
-                <TableColumn prefWidth="249.0" text="BatchID" />
-                <TableColumn prefWidth="245.0" text="No. of Students of the Batch" />
+                <TableColumn prefWidth="219.0" text="BatchID" />
+                <TableColumn prefWidth="275.0" text="No. of Students of the Batch" />
                 <TableColumn prefWidth="366.0" text="Total Students of the Course" />
                 <TableColumn prefWidth="192.0" text="Operator" />
             </columns>
