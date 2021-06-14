@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import util.AppBarIcon;
 import util.MaterialUI;
@@ -27,7 +28,7 @@ public class HomeFormController {
     public TextField txtQuery;
     public Label lblTime;
 
-    public void initialize(){
+    public void initialize() {
 
         MaterialUI.paintTextFields(txtQuery);
 
@@ -46,7 +47,12 @@ public class HomeFormController {
     }
 
     private void GetTime() {
-        Task task = new Task() {
+
+        MainFormController mainFormController = new MainFormController();
+        mainFormController.setSessionStatus(1);
+
+        Task task = new Task(){
+
             @Override
             protected Object call() throws Exception {
                 while (true){
@@ -56,14 +62,15 @@ public class HomeFormController {
                     }catch (InterruptedException e){
                         e.printStackTrace();
                     }
-
                     Platform.runLater(()->{
                         lblTime.setText(time);
                     });
                 }
             }
         };
-        new Thread(task).start();
+        Thread timer = new Thread(task);
+        timer.setDaemon(true);
+        timer.start();
     }
 
     public void btnManageStudents_OnAction(ActionEvent actionEvent) {
@@ -71,6 +78,9 @@ public class HomeFormController {
     }
 
     public void btnManageStudents_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            navigate("Manage Students", "/view/ManageStudentsForm.fxml");
+        }
     }
 
     public void btnManageCourses_OnAction(ActionEvent actionEvent) {
@@ -78,6 +88,9 @@ public class HomeFormController {
     }
 
     public void btnManageCourses_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            navigate("Manage Course Details", "/view/ManageCoursesForm.fxml");
+        }
     }
 
     public void btnManagePayments_OnAction(ActionEvent actionEvent) {
@@ -85,6 +98,9 @@ public class HomeFormController {
     }
 
     public void btnManagePayments_OnKyeReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            navigate("Manage Payment Details", "/view/ManagePaymentsForm.fxml");
+        }
     }
 
     public void btnManageUsers_OnAction(ActionEvent actionEvent) {
@@ -92,6 +108,9 @@ public class HomeFormController {
     }
 
     public void btnManageUsers_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            navigate("Manage Users", "/view/ManageUsersForm.fxml");
+        }
     }
 
     public void btnViewPayments_OnAction(ActionEvent actionEvent) {
@@ -99,12 +118,15 @@ public class HomeFormController {
     }
 
     public void btnViewPayments_OnKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            navigate("View All Payments", "/view/ViewAllPaymentsForm.fxml");
+        }
     }
 
-    private void navigate(String title, String url){
+    private void navigate(String title, String url) {
         MainFormController ctrl = (MainFormController) tblDashboard.getScene().getUserData();
-        ctrl.navigate(title, url, AppBarIcon.NAV_ICON_BACK, ()->{
-            ctrl.navigate("Student Management System", "/view/HomeForm.fxml", AppBarIcon.NAV_ICON_HOME);
+        ctrl.navigate(title, url, AppBarIcon.NAV_ICON_BACK, () -> {
+            ctrl.navigate("Student Payment Management System", "/view/HomeForm.fxml", AppBarIcon.NAV_ICON_HOME);
         });
     }
 }

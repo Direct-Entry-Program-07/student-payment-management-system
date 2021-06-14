@@ -18,6 +18,8 @@ import java.io.IOException;
 
 public class MainFormController {
 
+    private int sessionStatus = 0;
+
     public AnchorPane pneAppBar;
     public ImageView imgClose;
     public ImageView imgMinimize;
@@ -39,7 +41,6 @@ public class MainFormController {
     public void navigate(String title, String url, AppBarIcon icon){
         navigate(title, url, icon, null);
     }
-
 
     public void navigate(String title, String url, AppBarIcon icon, NavActionListener navActionListener) {
 
@@ -135,5 +136,13 @@ public class MainFormController {
             imgNav.setImage((Image) imgNav.getUserData());
             imgNav.setUserData(temp);
         }
+    }
+
+    public int getSessionStatus() {
+        return sessionStatus;
+    }
+
+    public void setSessionStatus(int sessionStatus) {
+        this.sessionStatus = sessionStatus;
     }
 }
