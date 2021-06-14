@@ -2,6 +2,8 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -9,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import util.AppBarIcon;
 import util.MaterialUI;
+
+import java.util.Date;
 
 public class HomeFormController {
 
@@ -21,15 +25,45 @@ public class HomeFormController {
     public Label lblDate;
     public JFXDatePicker pckrDate;
     public TextField txtQuery;
+    public Label lblTime;
 
     public void initialize(){
 
         MaterialUI.paintTextFields(txtQuery);
 
+        GetTime();
+        GetDate();
+
         tblDashboard.getItems().add(new Object());
         tblDashboard.getItems().add(new Object());
         tblDashboard.getItems().add(new Object());
         tblDashboard.getItems().add(new Object());
+    }
+
+    private void GetDate() {
+        String date = String.format("%1$tY-%1$tm-%1$td", new Date());
+        lblDate.setText(date);
+    }
+
+    private void GetTime() {
+        Task task = new Task() {
+            @Override
+            protected Object call() throws Exception {
+                while (true){
+                    String time = String.format("%tT", new Date());
+                    try{
+                        Thread.sleep(900);
+                    }catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+
+                    Platform.runLater(()->{
+                        lblTime.setText(time);
+                    });
+                }
+            }
+        };
+        new Thread(task).start();
     }
 
     public void btnManageStudents_OnAction(ActionEvent actionEvent) {
