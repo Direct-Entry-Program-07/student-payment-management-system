@@ -32,7 +32,7 @@
             </JFXButton>
          </children>
       </HBox>
-      <TableView fx:id="tblStudents" layoutX="24.0" layoutY="130.0" prefHeight="666.0" prefWidth="1384.0">
+      <TableView fx:id="tblStudents" layoutX="24.0" layoutY="130.0" onKeyPressed="#tblStudents_OnKeyPressed" prefHeight="666.0" prefWidth="1384.0">
         <columns>
           <TableColumn prefWidth="192.0" text="Student Name" />
           <TableColumn prefWidth="139.0" text="NIC" />

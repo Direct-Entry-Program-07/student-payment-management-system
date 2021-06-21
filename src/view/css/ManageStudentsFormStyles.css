@@ -40,3 +40,7 @@
     -fx-text-fill: white;
     -fx-background-color: #03A9F4 !important;
 }
+
+.action-icons:hover{
+    -fx-cursor: hand;
+}

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" stylesheets="@css/SecondaryFormsStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCourseFormController">
+<AnchorPane fx:id="root" prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" stylesheets="@css/SecondaryFormsStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddStudentFormController">
     <children>
         <AnchorPane layoutX="18.0" layoutY="17.0" prefHeight="678.0" prefWidth="614.0" style="-fx-border-color: #81D4FA; -fx-border-radius: 10;" />
         <VBox layoutX="24.0" layoutY="35.0" prefHeight="626.0" prefWidth="601.0" spacing="30.0">
@@ -27,7 +27,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 943245624V">
+                        <TextField fx:id="txtNIC" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 943245624V">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -47,7 +47,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: Jay John">
+                        <TextField fx:id="txtStudentName" prefHeight="32.0" prefWidth="375.0" promptText="Eg: Jay John">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -67,7 +67,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 0742563248">
+                        <TextField fx:id="txtContactNumber" onKeyTyped="#txtContactNumber_OnKeyTyped" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 0742563248">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -87,7 +87,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextArea prefHeight="109.0" prefWidth="375.0" promptText="Eg: galle" wrapText="true">
+                        <TextArea fx:id="txtAddress" prefHeight="109.0" prefWidth="375.0" promptText="Eg: galle" wrapText="true">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -104,7 +104,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 1996-05-02">
+                        <TextField fx:id="txtDateOfBirth" onKeyTyped="#txtDateOfBirth_OnKeyTyped" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 1996-05-02">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -124,7 +124,7 @@
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: abc@gmail.com">
+                        <TextField fx:id="txtEmailAddress" prefHeight="32.0" prefWidth="375.0" promptText="Eg: abc@gmail.com">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -144,7 +144,7 @@
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
                         </Label>
-                        <ComboBox prefHeight="32.0" prefWidth="375.0" promptText="DEP" style="-fx-background-color: #B3E5FC;">
+                        <ComboBox fx:id="cmbCourseID" prefHeight="32.0" prefWidth="375.0" promptText="DEP" style="-fx-background-color: #B3E5FC;">
                             <HBox.margin>
                                 <Insets top="6.0" />
                             </HBox.margin>
@@ -164,7 +164,7 @@
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
                         </Label>
-                        <ComboBox prefHeight="32.0" prefWidth="375.0" promptText="7" style="-fx-background-color: #B3E5FC;">
+                        <ComboBox fx:id="cmbBatchID" prefHeight="32.0" prefWidth="375.0" promptText="7" style="-fx-background-color: #B3E5FC;">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
@@ -173,12 +173,12 @@
                 </HBox>
             </children>
         </VBox>
-        <JFXButton fx:id="btnSave" layoutX="460.0" layoutY="722.0" onAction="#btnSave_OnAction" prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Save">
+        <JFXButton fx:id="btnSave" layoutX="422.0" layoutY="722.0" onAction="#btnSave_OnAction" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: #B3E5FC;" text="Save Student">
             <font>
                 <Font size="20.0" />
             </font>
         </JFXButton>
-        <JFXButton fx:id="btnCancel" layoutX="274.0" layoutY="722.0" onAction="#btnCancel_OnAction" prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Cancel">
+        <JFXButton fx:id="btnCancel" layoutX="239.0" layoutY="722.0" onAction="#btnCancel_OnAction" prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Cancel">
             <font>
                 <Font size="20.0" />
             </font>

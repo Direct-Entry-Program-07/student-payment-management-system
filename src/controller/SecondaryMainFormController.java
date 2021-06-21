@@ -31,41 +31,21 @@ public class SecondaryMainFormController {
     }
 
     public void navigate(String title, String url, AppBarIcon icon){
+
         navigate(title, url, icon, null);
     }
 
 
     public void navigate(String title, String url, AppBarIcon icon, NavActionListener navActionListener) {
+        navigate(title,url,icon,navActionListener,null);
+    }
+
+    public void navigate(String title, String url, AppBarIcon icon, NavActionListener navActionListener, Object data){
 
         try {
-            /*imgNav.setVisible(true);
-            this.icon = icon;
-            this.navActionListener = navActionListener;
-
-            if (this.navActionListener == null) {
-                imgNav.setCursor(Cursor.DEFAULT);
-            } else {
-                imgNav.setCursor(Cursor.HAND);
-            }
-
-            *//* Let's set the icon*//*
-            switch (icon) {
-                case NAV_ICON_NONE:
-                    imgNav.setVisible(false);
-                    imgNav.setUserData(null);
-                    break;
-                case NAV_ICON_HOME:
-                    imgNav.setImage(new Image("/view/assets/icons/home.png"));
-                    imgNav.setUserData(new Image("/view/assets/icons/home-hover.png"));
-                    break;
-                case NAV_ICON_BACK:
-                    imgNav.setImage(new Image("/view/assets/icons/back.png"));
-                    imgNav.setUserData(new Image("/view/assets/icons/back-hover.png"));
-                    break;
-            }*/
-
             Stage primaryStage = ((Stage) pneStage.getScene().getWindow());
-            AnchorPane root = FXMLLoader.load(this.getClass().getResource(url));
+            AnchorPane root= FXMLLoader.load(this.getClass().getResource(url));
+            root.setUserData(data);
             pneStage.getChildren().clear();
             FadeTransition ft = new FadeTransition(Duration.millis(500), pneStage);
             ft.setFromValue(0);
@@ -86,7 +66,6 @@ public class SecondaryMainFormController {
 
     private void initWindow() {
         lblTitle.setMouseTransparent(true);
-        //imgNav.setVisible(false);
 
         Platform.runLater(() -> {
             lblTitle.setText(((Stage) (imgClose.getScene().getWindow())).getTitle());
@@ -105,30 +84,9 @@ public class SecondaryMainFormController {
             }
         });
 
-//        imgNav.setOnMouseEntered(event -> swapNavIcon());
-//        imgNav.setOnMouseExited(event -> swapNavIcon());
-//        imgNav.setOnMouseClicked(event -> {
-//            if (navActionListener != null) {
-//                navActionListener.handle();
-//            }
-//        });
-
         imgClose.setOnMouseEntered(event -> imgClose.setImage(new Image("/view/assets/icons/close-hover.png")));
         imgClose.setOnMouseExited(event -> imgClose.setImage(new Image("/view/assets/icons/close.png")));
         imgClose.setOnMouseClicked(event -> ((Stage) (imgClose.getScene().getWindow())).close());
-
-//        imgMinimize.setOnMouseEntered(event -> imgMinimize.setImage(new Image("/view/assets/icons/minimize-hover.png")));
-//        imgMinimize.setOnMouseExited(event -> imgMinimize.setImage(new Image("/view/assets/icons/minimize.png")));
-//        imgMinimize.setOnMouseClicked(event -> ((Stage) (imgClose.getScene().getWindow())).setIconified(true));
-
     }
-
-//    private void swapNavIcon() {
-//        if (icon != AppBarIcon.NAV_ICON_NONE && navActionListener != null) {
-//            Image temp = imgNav.getImage();
-//            imgNav.setImage((Image) imgNav.getUserData());
-//            imgNav.setUserData(temp);
-//        }
-//    }
 
 }

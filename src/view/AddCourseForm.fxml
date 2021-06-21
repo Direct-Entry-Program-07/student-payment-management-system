@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" stylesheets="@css/SecondaryFormsStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddStudentFormController">
+<AnchorPane fx:id="root" prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" stylesheets="@css/SecondaryFormsStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCourseFormController">
    <children>
       <AnchorPane layoutX="18.0" layoutY="17.0" prefHeight="678.0" prefWidth="614.0" style="-fx-border-color: #81D4FA; -fx-border-radius: 10;" />
       <VBox layoutX="24.0" layoutY="35.0" prefHeight="626.0" prefWidth="601.0" spacing="30.0">
@@ -26,7 +26,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: DEPS">
+                  <TextField fx:id="txtCourseId" prefHeight="32.0" prefWidth="375.0" promptText="Eg: DEPS">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -46,7 +46,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="32.0" prefWidth="375.0" promptText="Direct Entry Program Advanced">
+                  <TextField fx:id="txtCourseName" prefHeight="32.0" prefWidth="375.0" promptText="Direct Entry Program Advanced">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -66,7 +66,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="32.0" prefWidth="153.0" promptText="Eg: 0742563248" text="01">
+                  <TextField fx:id="txtBatchId" prefHeight="32.0" prefWidth="153.0" promptText="Eg: 0742563248" text="01">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -74,7 +74,7 @@
                         <Insets top="6.0" />
                      </HBox.margin>
                   </TextField>
-                  <JFXButton prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Create new batch">
+                  <JFXButton fx:id="btnCreateANewBatch" onAction="#btnCreateANewBatch_OnAction" prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Create new batch">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -94,7 +94,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 50">
+                  <TextField fx:id="txtNoOfStudents" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 50">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -114,7 +114,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <JFXDatePicker defaultColor="#81d4fa" prefHeight="26.0" prefWidth="374.0" promptText="Eg: 2003-03.04">
+                  <JFXDatePicker fx:id="pckrCommencingDate" defaultColor="#81d4fa" prefHeight="26.0" prefWidth="374.0" promptText="Eg: 2003-03.04">
                      <HBox.margin>
                         <Insets top="6.0" />
                      </HBox.margin>
@@ -131,12 +131,12 @@
                         <Insets left="10.0" top="12.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea prefHeight="130.0" prefWidth="372.0" wrapText="true" />
+                  <TextArea fx:id="txtNote" prefHeight="130.0" prefWidth="372.0" wrapText="true" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <JFXButton fx:id="btnSave" layoutX="460.0" layoutY="722.0" onAction="#btnSave_OnAction" prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Save">
+      <JFXButton fx:id="btnSave" layoutX="460.0" layoutY="722.0" onAction="#btnSave_OnAction" prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Save Course">
          <font>
             <Font size="20.0" />
          </font>

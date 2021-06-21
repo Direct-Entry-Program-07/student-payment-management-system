@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
+import model.Student;
+import model.StudentTM;
 import util.AppBarIcon;
 import util.NavActionListener;
 
@@ -39,10 +41,15 @@ public class MainFormController {
     }
 
     public void navigate(String title, String url, AppBarIcon icon){
+
         navigate(title, url, icon, null);
     }
 
     public void navigate(String title, String url, AppBarIcon icon, NavActionListener navActionListener) {
+        navigate(title, url, icon, navActionListener, null);
+    }
+
+    public void navigate(String title, String url, AppBarIcon icon, NavActionListener navActionListener, Object data){
 
         try {
             imgNav.setVisible(true);
@@ -89,6 +96,7 @@ public class MainFormController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void initWindow() {
