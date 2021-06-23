@@ -78,7 +78,6 @@ public class ManageCoursesFormController {
         }catch (RuntimeException | NotFoundException e){
             new Alert(Alert.AlertType.ERROR, "Failed to delete the item", ButtonType.OK).show();
         }
-
     }
 
     private void updateCourse(CourseTM tm) {

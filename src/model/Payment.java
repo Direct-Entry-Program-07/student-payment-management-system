@@ -13,12 +13,15 @@ public class Payment {
     private int paymentMethod;
     private BigDecimal balance;
     private String note;
+    private String studentName;
 
     public Payment() {
     }
 
-    public Payment(String receiptNumber, String nic, int courseId, BigDecimal totalFee, BigDecimal remaining, int paymentReason, BigDecimal paymentAmount, int paymentMethod, BigDecimal balance, String note) {
+    public Payment(String receiptNumber, String nic, String studentName, int courseId, BigDecimal totalFee, BigDecimal remaining, int paymentReason, BigDecimal paymentAmount, int paymentMethod, BigDecimal balance, String note) {
+        this.receiptNumber = receiptNumber;
         this.nic = nic;
+        this.studentName = studentName;
         this.courseId = courseId;
         this.totalFee = totalFee;
         this.remaining = remaining;
@@ -123,5 +126,13 @@ public class Payment {
                 ", balance=" + balance +
                 ", note='" + note + '\'' +
                 '}';
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 }

@@ -11,10 +11,14 @@ public class StudentService {
 
     static {
         //Add dummy data to student table
-        Student s1 = new Student("453627453627", "Nimal Rajapaksha", "072-3456784", "Galle", LocalDate.of(2000, 10, 12), "nimal@abc.com", "DEP", "7");
-        Student s2 = new Student("385936274V", "Kamal Ranatunga", "093-4526473", "Kandy", LocalDate.of(1987, 03, 19), "kamal@pqr.com", "GDCE", "13");
+        Student s1 = new Student("123456789V", "Dinesh Karunarathna", "071-2345678", "No: 23, Galle", LocalDate.of(1993, 8, 8), "dinesh@ijse.lk", "DEP-6", "6");
+        Student s2 = new Student("763546374657", "Sampath kumara", "092-3647562", "A/S, Kandy", LocalDate.of(1998, 3, 4), "sampath@gmail.com", "CMJD-15", "15");
+        Student s3 = new Student("234567846738", "Adeesha Perera", "012-2647583", "3/2, abcd, matara", LocalDate.of(1996, 5, 6), "perera@yahool.com", "GDSE-13", "13");
+        Student s4 = new Student("234563746v", "Isuru Udana", "045-2348763", "2, Colombo", LocalDate.of(1997, 3, 4), "issa@ijse.com", "ABSD-4", "4");
         studentDB.add(s1);
         studentDB.add(s2);
+        studentDB.add(s3);
+        studentDB.add(s4);
     }
 
     public StudentService() {

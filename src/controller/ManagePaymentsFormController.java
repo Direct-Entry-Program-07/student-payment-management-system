@@ -24,6 +24,7 @@ import util.AppBarIcon;
 import util.MaterialUI;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class ManagePaymentsFormController {
@@ -118,12 +119,17 @@ public class ManagePaymentsFormController {
         tblPayments.getItems().clear();
 
         for (Payment payment : paymentService.findPayments(query)) {
+
+            BigDecimal totalPayment = payment.getTotalFee().subtract(payment.getBalance());
+
             tblPayments.getItems().add(new PaymentTM(
                     payment.getReceiptNumber(),
                     payment.getNic(),
-                    payment.getNote(),
-                    payment.get
-            ))
+                    payment.getStudentName(),
+                    String.valueOf(payment.getCourseId()),
+                    totalPayment,
+                    payment.getBalance()
+            ));
         }
     }
 

@@ -7,25 +7,25 @@ public class PaymentTM {
     private String nic;
     private String studentName;
     private String courseName;
-    private BigDecimal totalFee;
+    private BigDecimal totalPayment;
     private BigDecimal balance;
 
     public PaymentTM() {
     }
 
-    public PaymentTM(String receiptNumber,String nic, String studentName, String courseName, BigDecimal totalFee, BigDecimal balance) {
+    public PaymentTM(String receiptNumber,String nic, String studentName, String courseName, BigDecimal totalPayment, BigDecimal balance) {
         this.setReceiptNumber(receiptNumber);
         this.nic = nic;
         this.studentName = studentName;
         this.courseName = courseName;
-        this.totalFee = totalFee;
+        this.totalPayment = totalPayment;
         this.balance = balance;
     }
 
     public PaymentTM(String receiptNumber,String nic, BigDecimal totalFee, BigDecimal balance) {
         this.setReceiptNumber(receiptNumber);
         this.nic = nic;
-        this.totalFee = totalFee;
+        this.totalPayment = totalFee;
         this.balance = balance;
     }
 
@@ -54,11 +54,11 @@ public class PaymentTM {
     }
 
     public BigDecimal getTotalFee() {
-        return totalFee;
+        return totalPayment;
     }
 
     public void setTotalFee(BigDecimal totalFee) {
-        this.totalFee = totalFee;
+        this.totalPayment = totalFee;
     }
 
     public BigDecimal getBalance() {
@@ -84,7 +84,7 @@ public class PaymentTM {
                 ", nic='" + nic + '\'' +
                 ", studentName='" + studentName + '\'' +
                 ", courseName='" + courseName + '\'' +
-                ", totalFee=" + totalFee +
+                ", totalFee=" + totalPayment +
                 ", balance=" + balance +
                 '}';
     }

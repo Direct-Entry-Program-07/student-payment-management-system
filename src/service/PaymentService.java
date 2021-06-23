@@ -11,8 +11,8 @@ public class PaymentService {
     private static final List<Payment> paymentDB = new ArrayList<>();
     static {
         //Add dummy data to payment table
-        Payment p1 = new Payment("R-0001","123456789v", 1, BigDecimal.valueOf(100000), BigDecimal.valueOf(30000), 1, BigDecimal.valueOf(20000), 0, BigDecimal.valueOf(10000), "Test");
-        Payment p2 = new Payment("R-0002","234567890v", 2, BigDecimal.valueOf(200000), BigDecimal.valueOf(50000), 1, BigDecimal.valueOf(20000), 0, BigDecimal.valueOf(30000), "Test");
+        Payment p1 = new Payment("R-0001","123456789v", "Amal Perera", 1, BigDecimal.valueOf(100000), BigDecimal.valueOf(30000), 1, BigDecimal.valueOf(20000), 0, BigDecimal.valueOf(10000), "Test");
+        Payment p2 = new Payment("R-0002","234567890v", "Kasun Sampath", 2, BigDecimal.valueOf(200000), BigDecimal.valueOf(50000), 1, BigDecimal.valueOf(20000), 0, BigDecimal.valueOf(30000), "Test");
         paymentDB.add(p1);
         paymentDB.add(p2);
     }
