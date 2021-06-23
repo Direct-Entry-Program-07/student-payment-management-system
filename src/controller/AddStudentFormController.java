@@ -9,11 +9,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import model.PaymentTM;
 import model.Student;
 import model.StudentTM;
 import service.StudentService;
 
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 import static util.ValidationUtil.*;
 
@@ -95,28 +97,38 @@ public class AddStudentFormController {
         String contactnumber = txtContactNumber.getText();
         String email = txtEmailAddress.getText();
 
-        if (!((nic.length() == 10 && (nic.endsWith("v") || nic.endsWith("V")) && isInteger(nic.substring(0, 9)))
-                || (nic.length() == 12 && isInteger(nic)))) {
+        Pattern nicPattern1 = Pattern.compile("(\\d{9}V)|(\\d{9}v)");
+        Pattern nicPattern2 = Pattern.compile("\\d{12}");
+
+        Pattern fullNamePattern = Pattern.compile("[A-Za-z]{3,}[A-Za-z ]*");
+
+        Pattern mobileNumberPattern = Pattern.compile("\\d{3}-\\d{7}$");
+
+        Pattern addressPattern = Pattern.compile("[A-Za-z0-9 :,.-/\\\\]+");
+
+        Pattern emailPattern = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
+
+        if (!(nicPattern1.matcher(nic).matches() || nicPattern2.matcher(nic).matches())){
             new Alert(Alert.AlertType.ERROR, "Invalid NIC").show();
             txtNIC.requestFocus();
             return false;
-        } else if (!(isValid(fullName, true, false) && fullName.trim().length() >= 3)) {
+        }else if (!(fullNamePattern.matcher(fullName).matches())) {
             new Alert(Alert.AlertType.ERROR, "Invalid name").show();
             txtStudentName.requestFocus();
             return false;
-        } else if (!(isValid(address, true, true, ':', ',', '.', '-', '/', '\\'))) {
+        }else if(!(mobileNumberPattern.matcher(contactnumber).matches())){
+            new Alert(Alert.AlertType.ERROR, "Invalid contact number").show();
+            txtContactNumber.requestFocus();
+            return false;
+        }else if (!(addressPattern.matcher(address).matches())){
             new Alert(Alert.AlertType.ERROR, "Invalid address").show();
             txtAddress.requestFocus();
             return false;
         } else if (!isValidDate(dob)) {
             new Alert(Alert.AlertType.ERROR, "Invalid date").show();
             txtDateOfBirth.requestFocus();
-        } else if (!(contactnumber.length() == 11 & isInteger(contactnumber.substring(0, 3)) && isInteger(contactnumber.substring(4, 11)))) {
-            new Alert(Alert.AlertType.ERROR, "Invalid contact number").show();
-            txtContactNumber.requestFocus();
-            return false;
-        } else if (!isValidEmail(email)) {
-            new Alert(Alert.AlertType.ERROR, "Invalid NIC").show();
+        }else if (!(emailPattern.matcher(email).matches())){
+            new Alert(Alert.AlertType.ERROR, "Invalid Email").show();
             txtEmailAddress.requestFocus();
             return false;
         }

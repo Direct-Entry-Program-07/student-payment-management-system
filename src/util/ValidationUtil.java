@@ -3,6 +3,8 @@ package util;
 import java.time.LocalDate;
 
 public class ValidationUtil {
+
+
     public static boolean isInteger(String input) {
         if (input.startsWith("+") || input.startsWith("-")) {
             return false;
@@ -46,7 +48,7 @@ public class ValidationUtil {
         }
     }
 
-    public static boolean isValidEmail(String input){
+    /*public static boolean isValidEmail(String input){
         String[] split = input.split("@");
 
         if (split.length != 2){
@@ -77,6 +79,6 @@ public class ValidationUtil {
             return false;
         }
         return true;
-    }
+    }*/
 
 }
