@@ -34,12 +34,13 @@
         </HBox>
         <TableView fx:id="tblPayments" layoutX="24.0" layoutY="130.0" prefHeight="666.0" prefWidth="1384.0" stylesheets="@css/ManagePaymentsFormStyles.css">
             <columns>
-                <TableColumn prefWidth="192.0" text="NIC" />
-                <TableColumn prefWidth="229.0" text="Student Name" />
-                <TableColumn prefWidth="250.0" text="Course Name" />
-                <TableColumn prefWidth="247.0" text="Total Payment" />
-                <TableColumn prefWidth="273.0" text="Balance" />
-                <TableColumn prefWidth="192.0" text="Update" />
+                <TableColumn prefWidth="158.0" text="Receipt Number" />
+                <TableColumn prefWidth="174.0" text="NIC" />
+                <TableColumn prefWidth="214.0" text="Student Name" />
+                <TableColumn prefWidth="232.0" text="Course Name" />
+                <TableColumn prefWidth="268.0" text="Total Payment" />
+                <TableColumn prefWidth="194.0" text="Balance" />
+            <TableColumn prefWidth="143.0" text="Operator" />
             </columns>
         </TableView>
     </children>

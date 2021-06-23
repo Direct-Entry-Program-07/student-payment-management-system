@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -62,6 +63,15 @@ public class ManageStudentsFormController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 loadAllStudents(newValue);
+            }
+        });
+
+        tblStudents.itemsProperty().addListener(new ChangeListener<ObservableList<StudentTM>>() {
+            @Override
+            public void changed(ObservableValue<? extends ObservableList<StudentTM>> observable, ObservableList<StudentTM> oldValue, ObservableList<StudentTM> newValue) {
+                if (newValue != null){
+                    tblStudents.refresh();
+                }
             }
         });
 

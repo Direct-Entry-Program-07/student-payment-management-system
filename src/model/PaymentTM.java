@@ -22,6 +22,12 @@ public class PaymentTM {
         this.balance = balance;
     }
 
+    public PaymentTM(String receiptNumber,String nic, BigDecimal totalFee, BigDecimal balance) {
+        this.setReceiptNumber(receiptNumber);
+        this.nic = nic;
+        this.totalFee = totalFee;
+        this.balance = balance;
+    }
 
     public String getNic() {
         return nic;

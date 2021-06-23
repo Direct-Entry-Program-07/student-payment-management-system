@@ -11,8 +11,8 @@ public class StudentService {
 
     static {
         //Add dummy data to student table
-        Student s1 = new Student("453627453627", "Nimal Rajapaksha", "0723456784", "Galle", LocalDate.of(2000, 10, 12), "nimal@abc.com", "DEP", "7");
-        Student s2 = new Student("385936274V", "Kamal Ranatunga", "0934526473", "Kandy", LocalDate.of(1987, 03, 19), "kamal@pqr.com", "GDCE", "13");
+        Student s1 = new Student("453627453627", "Nimal Rajapaksha", "072-3456784", "Galle", LocalDate.of(2000, 10, 12), "nimal@abc.com", "DEP", "7");
+        Student s2 = new Student("385936274V", "Kamal Ranatunga", "093-4526473", "Kandy", LocalDate.of(1987, 03, 19), "kamal@pqr.com", "GDCE", "13");
         studentDB.add(s1);
         studentDB.add(s2);
     }
