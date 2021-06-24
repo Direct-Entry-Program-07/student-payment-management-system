@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import model.Course;
 import model.CourseTM;
 import service.CourseService;
@@ -31,14 +34,31 @@ public class ManageCoursesFormController {
     public TextField txtQuery;
     public TableView<CourseTM> tblCourses;
     public JFXButton btnAddCourse;
+    ObservableList<String> cmbBatchIdOptions = FXCollections.observableArrayList();
 
     public void initialize() {
+
+
 
         MaterialUI.paintTextFields(txtQuery);
 
         tblCourses.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("courseID"));
         tblCourses.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("courseName"));
-        tblCourses.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("batchID"));
+        TableColumn<CourseTM, ComboBox> batchIdCombo = (TableColumn<CourseTM, ComboBox>) tblCourses.getColumns().get(2);
+        batchIdCombo.setCellValueFactory(param -> {
+            ComboBox batchId = new ComboBox();
+            batchId.setPrefWidth(tblCourses.getColumns().get(2).getWidth());
+            batchId.setPrefHeight(40);
+
+           tblCourses.getColumns().get(2).widthProperty().addListener(new ChangeListener<Number>() {
+               @Override
+               public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                   batchId.setPrefWidth((double) newValue);
+               }
+           });
+
+            return new ReadOnlyObjectWrapper<>(batchId);
+        });
         tblCourses.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("noOfStudentsForTheBatch"));
         tblCourses.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>(""));
         tblCourses.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("batchCommencingDate"));
@@ -65,7 +85,6 @@ public class ManageCoursesFormController {
         });
 
         LoadAllCourses("");
-
     }
 
     private void deleteCourse(CourseTM tm) {

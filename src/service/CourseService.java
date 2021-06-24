@@ -17,13 +17,15 @@ public class CourseService {
     static {
         // add dummy data to course table
         Course c1 = new Course("DEP", "Direct Entry Program", 2 ,20, LocalDate.of(2021, 3, 3), "Note1");
-        Course c2 = new Course("CMJD", "Direct Entry Program", 3 ,15, LocalDate.of(2022, 9, 3), "Note2");
-        Course c3 = new Course("GDSE", "General NCT", 10 ,100, LocalDate.of(2020, 9, 3), "Note 3");
-        Course c4 = new Course("DEP", "Direct Entry Program", 3 ,20, LocalDate.of(2021, 3, 3), "Note1");
+        Course c2 = new Course("CMJD", "CMJD Professionals", 3 ,15, LocalDate.of(2022, 9, 3), "Note2");
+        Course c3 = new Course("GDSE", "Graduate Diploma in Software Engineering", 10 ,100, LocalDate.of(2020, 9, 3), "Note 3");
+        Course c4 = new Course("ABSD", "Advanced Business Solution Developer", 3 ,20, LocalDate.of(2021, 3, 3), "Note 4");
+        Course c5 = new Course("RWAD", "Rapid Web App Developer", 1 ,50, LocalDate.of(2021, 10, 3), "Note 5");
         courseDB.add(c1);
         courseDB.add(c2);
         courseDB.add(c3);
         courseDB.add(c4);
+        courseDB.add(c5);
     }
 
     public CourseService(){
