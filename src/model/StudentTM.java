@@ -7,6 +7,7 @@ public class StudentTM {
     private String contactNumber;
     private String emailAddress;
     private String course;
+    private String courseId;
 
     public StudentTM() {
     }
@@ -65,6 +66,7 @@ public class StudentTM {
     }
 
     public void setCourse(String course) {
+
         this.course = course;
     }
 

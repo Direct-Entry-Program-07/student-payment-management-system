@@ -70,6 +70,7 @@ public class ManageStudentsFormController {
             @Override
             public void changed(ObservableValue<? extends ObservableList<StudentTM>> observable, ObservableList<StudentTM> oldValue, ObservableList<StudentTM> newValue) {
                 if (newValue != null){
+                    System.out.println("changed");
                     tblStudents.refresh();
                 }
             }

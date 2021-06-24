@@ -144,7 +144,7 @@
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
                         </Label>
-                        <ComboBox fx:id="cmbCourseID" prefHeight="32.0" prefWidth="375.0" promptText="DEP" style="-fx-background-color: #B3E5FC;">
+                        <ComboBox fx:id="cmbCourseID" prefHeight="32.0" prefWidth="375.0" promptText="Select a course" style="-fx-background-color: #B3E5FC;">
                             <HBox.margin>
                                 <Insets top="6.0" />
                             </HBox.margin>
@@ -164,7 +164,7 @@
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
                         </Label>
-                        <ComboBox fx:id="cmbBatchID" prefHeight="32.0" prefWidth="375.0" promptText="7" style="-fx-background-color: #B3E5FC;">
+                        <ComboBox fx:id="cmbBatchID" prefHeight="32.0" prefWidth="375.0" promptText="Select a batch" style="-fx-background-color: #B3E5FC;">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>

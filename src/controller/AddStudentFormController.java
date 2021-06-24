@@ -2,6 +2,9 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
@@ -9,15 +12,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import model.PaymentTM;
 import model.Student;
 import model.StudentTM;
+import service.CourseService;
 import service.StudentService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.regex.Pattern;
 
-import static util.ValidationUtil.*;
+import static util.ValidationUtil.isValidDate;
 
 public class AddStudentFormController {
     private final StudentService studentService = new StudentService();
@@ -34,6 +38,10 @@ public class AddStudentFormController {
     public ComboBox cmbBatchID;
     public TextField txtCourseId;
 
+    public CourseService courseService = new CourseService();
+    ObservableList<String> cmbCourseOptions = FXCollections.observableArrayList();
+    ObservableList<String> cmbBatchOptions = FXCollections.observableArrayList();
+
     public void initialize() {
 
         Platform.runLater(() -> {
@@ -42,6 +50,9 @@ public class AddStudentFormController {
                 StudentTM tm = (StudentTM) root.getUserData();
                 Student student = studentService.findStudent(tm.getNic());
 
+                String[] split = student.getCourseId().toString().split("-");
+
+
                 txtNIC.setEditable(false);
                 txtNIC.setText(student.getNic());
                 txtStudentName.setText(student.getFullName());
@@ -49,10 +60,37 @@ public class AddStudentFormController {
                 txtContactNumber.setText(student.getContactNumber());
                 txtEmailAddress.setText(student.getEmailAddress());
                 txtDateOfBirth.setText(student.getDateOfBirth().toString());
+                cmbCourseID.getSelectionModel().select(split[0]);
+                cmbBatchID.getSelectionModel().select(split[1]);
 
                 btnSave.setText("Update Student");
             }
         });
+
+        for (Object allCourses : courseService.getAllCourses()) {
+            String s = allCourses.toString();
+            if (cmbCourseOptions.contains(s)){
+                continue;
+            }
+            cmbCourseOptions.add(s);
+        }
+
+        cmbCourseID.setItems(cmbCourseOptions);
+
+       cmbCourseID.valueProperty().addListener(new ChangeListener() {
+           @Override
+           public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+               cmbBatchOptions.clear();
+
+               String selectedCourse = newValue.toString();
+               List batches = courseService.getCorrespondingBatches(selectedCourse);
+               for (Object batch : batches) {
+                   String s = batch.toString();
+                   cmbBatchOptions.add(s);
+               }
+               cmbBatchID.setItems(cmbBatchOptions);
+           }
+       });
     }
 
     public void btnSave_OnAction(ActionEvent actionEvent) {
@@ -67,7 +105,7 @@ public class AddStudentFormController {
                     txtAddress.getText(),
                     LocalDate.parse(txtDateOfBirth.getText()),
                     txtEmailAddress.getText(),
-                    (String) cmbCourseID.getValue(),
+                    ((String) cmbCourseID.getValue() + "-" + (String) cmbBatchID.getValue()),
                     (String) cmbBatchID.getValue());
 
             if (btnSave.getText().equals("Save Student")) {
@@ -78,13 +116,13 @@ public class AddStudentFormController {
                 tm.setAddress(txtAddress.getText());
                 tm.setContactNumber(txtContactNumber.getText());
                 tm.setEmailAddress(txtEmailAddress.getText());
-                tm.setCourse((String) cmbCourseID.getValue() + "-" + (String) cmbBatchID.getValue());
+                tm.setCourse(cmbCourseID.getValue() + "-" + cmbBatchID.getValue());
                 studentService.updateStudent(student);
             }
             new Alert(Alert.AlertType.NONE, "Student has been saved successfully", ButtonType.OK).show();
 
         } catch (RuntimeException e) {
-           // e.printStackTrace();
+            e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to save the student", ButtonType.OK).show();
         }
     }
@@ -108,28 +146,36 @@ public class AddStudentFormController {
 
         Pattern emailPattern = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
 
-        if (!(nicPattern1.matcher(nic).matches() || nicPattern2.matcher(nic).matches())){
+        if (!(nicPattern1.matcher(nic).matches() || nicPattern2.matcher(nic).matches())) {
             new Alert(Alert.AlertType.ERROR, "Invalid NIC").show();
             txtNIC.requestFocus();
             return false;
-        }else if (!(fullNamePattern.matcher(fullName).matches())) {
+        } else if (!(fullNamePattern.matcher(fullName).matches())) {
             new Alert(Alert.AlertType.ERROR, "Invalid name").show();
             txtStudentName.requestFocus();
             return false;
-        }else if(!(mobileNumberPattern.matcher(contactnumber).matches())){
+        } else if (!(mobileNumberPattern.matcher(contactnumber).matches())) {
             new Alert(Alert.AlertType.ERROR, "Invalid contact number").show();
             txtContactNumber.requestFocus();
             return false;
-        }else if (!(addressPattern.matcher(address).matches())){
+        } else if (!(addressPattern.matcher(address).matches())) {
             new Alert(Alert.AlertType.ERROR, "Invalid address").show();
             txtAddress.requestFocus();
             return false;
         } else if (!isValidDate(dob)) {
             new Alert(Alert.AlertType.ERROR, "Invalid date").show();
             txtDateOfBirth.requestFocus();
-        }else if (!(emailPattern.matcher(email).matches())){
+        } else if (!(emailPattern.matcher(email).matches())) {
             new Alert(Alert.AlertType.ERROR, "Invalid Email").show();
             txtEmailAddress.requestFocus();
+            return false;
+        } else if (cmbCourseID.getSelectionModel().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a course").show();
+            cmbCourseID.requestFocus();
+            return false;
+        } else if (cmbBatchID.getSelectionModel().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a batch").show();
+            cmbBatchID.requestFocus();
             return false;
         }
         return true;

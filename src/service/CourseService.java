@@ -6,18 +6,24 @@ import service.exception.NotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CourseService {
     private static final List<Course> courseDB = new ArrayList<>();
 
+    public void initialize(){
+    }
+
     static {
         // add dummy data to course table
-        Course c1 = new Course("DEP-2", "Direct Entry Program", 2 ,20, LocalDate.of(2021, 3, 3), "Note1");
-        Course c2 = new Course("DEP-3", "Direct Entry Program", 3 ,15, LocalDate.of(2022, 9, 3), "Note2");
-        Course c3 = new Course("GNCT-10", "General NCT", 10 ,100, LocalDate.of(2020, 9, 3), "Note 3");
+        Course c1 = new Course("DEP", "Direct Entry Program", 2 ,20, LocalDate.of(2021, 3, 3), "Note1");
+        Course c2 = new Course("CMJD", "Direct Entry Program", 3 ,15, LocalDate.of(2022, 9, 3), "Note2");
+        Course c3 = new Course("GDSE", "General NCT", 10 ,100, LocalDate.of(2020, 9, 3), "Note 3");
+        Course c4 = new Course("DEP", "Direct Entry Program", 3 ,20, LocalDate.of(2021, 3, 3), "Note1");
         courseDB.add(c1);
         courseDB.add(c2);
         courseDB.add(c3);
+        courseDB.add(c4);
     }
 
     public CourseService(){
@@ -61,6 +67,25 @@ public class CourseService {
                 result.add(course);
             }
 
+        }
+        return result;
+    }
+
+    public List getAllCourses() {
+        List result = new ArrayList<>();
+        for (Course course : courseDB) {
+            result.add(course.getCourseID());
+        }
+
+        return result;
+    }
+
+    public List getCorrespondingBatches(Object selectedCourse){
+        List result = new ArrayList();
+        for (Course course : courseDB) {
+            if (course.getCourseID() == selectedCourse){
+                result.add(course.getBatchID());
+            }
         }
         return result;
     }
