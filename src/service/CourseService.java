@@ -21,11 +21,13 @@ public class CourseService {
         Course c3 = new Course("GDSE", "Graduate Diploma in Software Engineering", 10 ,100, LocalDate.of(2020, 9, 3), "Note 3");
         Course c4 = new Course("ABSD", "Advanced Business Solution Developer", 3 ,20, LocalDate.of(2021, 3, 3), "Note 4");
         Course c5 = new Course("RWAD", "Rapid Web App Developer", 1 ,50, LocalDate.of(2021, 10, 3), "Note 5");
+        Course c6 = new Course("DEP", "Direct Entry Program", 3 ,30, LocalDate.of(2022, 2, 3), "Note 6");
         courseDB.add(c1);
         courseDB.add(c2);
         courseDB.add(c3);
         courseDB.add(c4);
         courseDB.add(c5);
+        courseDB.add(c6);
     }
 
     public CourseService(){
@@ -58,6 +60,16 @@ public class CourseService {
             }
         }
         throw new NotFoundException();
+    }
+
+    public Boolean isCourseExists(String inputId) {
+        for (Course course : courseDB) {
+            String[] rawCourseId = course.getCourseID().split("-");
+            if (rawCourseId[0].equals(inputId.trim())){
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<Course> findCourses(String query){

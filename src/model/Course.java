@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class Course {
     private String courseID;
@@ -38,12 +39,13 @@ public class Course {
         this.courseName = courseName;
     }
 
+
     public int getBatchID() {
         return batchID;
     }
 
     public void setBatchID(int batchID) {
-        batchID = batchID;
+        this.batchID = batchID;
     }
 
     public int getNoOfStudentsForTheBatch() {
@@ -75,7 +77,7 @@ public class Course {
         return "Course{" +
                 "courseID='" + courseID + '\'' +
                 ", courseName='" + courseName + '\'' +
-                ", BatchID=" + batchID +
+                ", batchID=" + batchID +
                 ", noOfStudentsForTheBatch=" + noOfStudentsForTheBatch +
                 ", batchCommencingDate=" + batchCommencingDate +
                 ", note='" + note + '\'' +

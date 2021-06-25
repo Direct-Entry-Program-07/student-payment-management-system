@@ -14,10 +14,12 @@ import javafx.stage.Window;
 import model.Course;
 import model.CourseTM;
 import service.CourseService;
-import service.exception.DuplicateEntryException;
 import service.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.util.regex.Pattern;
+
+import static util.ValidationUtil.isValidDate;
 
 public class AddCourseFormController {
     private final CourseService courseService = new CourseService();
@@ -65,6 +67,10 @@ public class AddCourseFormController {
 
     public void btnSave_OnAction(ActionEvent actionEvent) {
 
+        if (!isValidated()){
+            return;
+        }
+
         try {
             Course course = new Course(
                     txtCourseId.getText()+"-"+txtBatchId.getText(),
@@ -74,6 +80,12 @@ public class AddCourseFormController {
                     LocalDate.parse(pckrCommencingDate.getValue().toString()),
                     txtNote.getText()
             );
+
+            if (courseService.isCourseExists(txtCourseId.getText())){
+                new Alert(Alert.AlertType.ERROR, "Duplicated Course ID").show();
+                txtCourseId.requestFocus();
+                return;
+            }
 
             if (btnSave.getText().equals("Save Course")) {
                 courseService.saveCourse(course);
@@ -102,5 +114,41 @@ public class AddCourseFormController {
     public void btnCreateANewBatch_OnAction(ActionEvent actionEvent) {
         txtBatchId.setText(String.valueOf(Integer.parseInt(txtBatchId.getText()) + 1));
         btnCreateANewBatch.setDisable(true);
+    }
+
+    public boolean isValidated(){
+        String courseId = txtCourseId.getText();
+        String courseName = txtCourseName.getText();
+        String batchId = txtBatchId.getText();
+        String noOfStudentsForTheBatch = txtNoOfStudents.getText();
+        String commencingDate = pckrCommencingDate.getValue().toString();
+        String note = txtNote.getText();
+
+        Pattern courseIdPattern = Pattern.compile("[A-Za-z]+");
+        Pattern courseNamePattern = Pattern.compile("[A-Za-z]+");
+        Pattern batchIdPattern = Pattern.compile("\\d{1,2}");
+        Pattern noStudentPattern = Pattern.compile("\\d{1,3}");
+
+        if (!(courseIdPattern.matcher(courseId).matches())){
+            new Alert(Alert.AlertType.ERROR, "Invalid Course ID").show();
+            txtCourseId.requestFocus();
+            return false;
+        }else if (!(courseNamePattern.matcher(courseName).matches())){
+            new Alert(Alert.AlertType.ERROR, "Invalid Course Name").show();
+            txtCourseName.requestFocus();
+            return false;
+        }else if (!(batchIdPattern.matcher(batchId).matches())){
+            new Alert(Alert.AlertType.ERROR, "Invalid Batch ID").show();
+            txtBatchId.requestFocus();
+            return false;
+        }else if (!(noStudentPattern.matcher(noOfStudentsForTheBatch).matches())){
+            new Alert(Alert.AlertType.ERROR, "Invalid Number of Students for the batch").show();
+            txtNoOfStudents.requestFocus();
+            return false;
+        }else if (!isValidDate(commencingDate)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid date").show();
+            pckrCommencingDate.requestFocus();
+        }
+        return true;
     }
 }

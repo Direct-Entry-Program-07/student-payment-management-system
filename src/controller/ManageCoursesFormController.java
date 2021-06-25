@@ -55,7 +55,11 @@ public class ManageCoursesFormController {
                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                    batchId.setPrefWidth((double) newValue);
                }
+
+
            });
+
+           batchId.setValue("batchID");
 
             return new ReadOnlyObjectWrapper<>(batchId);
         });
@@ -134,6 +138,8 @@ public class ManageCoursesFormController {
                     course.getNoOfStudentsForTheBatch(),
                     course.getBatchCommencingDate(),
                     course.getNote()));
+
+            System.out.println(course);
         }
     }
 

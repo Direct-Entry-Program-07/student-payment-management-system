@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class CourseTM {
     private String courseID;
@@ -37,6 +38,7 @@ public class CourseTM {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
+
 
     public int getBatchID() {
         return BatchID;
