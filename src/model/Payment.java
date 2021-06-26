@@ -5,12 +5,12 @@ import java.math.BigDecimal;
 public class Payment {
     private String receiptNumber;
     private String nic;
-    private int courseId;
+    private String courseName;
     private BigDecimal totalFee;
     private BigDecimal remaining;
-    private int paymentReason;
+    private String paymentReason;
     private BigDecimal paymentAmount;
-    private int paymentMethod;
+    private String paymentMethod;
     private BigDecimal balance;
     private String note;
     private String studentName;
@@ -18,11 +18,11 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(String receiptNumber, String nic, String studentName, int courseId, BigDecimal totalFee, BigDecimal remaining, int paymentReason, BigDecimal paymentAmount, int paymentMethod, BigDecimal balance, String note) {
+    public Payment(String receiptNumber, String nic, String studentName, String courseName, BigDecimal totalFee, BigDecimal remaining, String paymentReason, BigDecimal paymentAmount, String paymentMethod, BigDecimal balance, String note) {
         this.receiptNumber = receiptNumber;
         this.nic = nic;
         this.studentName = studentName;
-        this.courseId = courseId;
+        this.courseName = courseName;
         this.totalFee = totalFee;
         this.remaining = remaining;
         this.paymentReason = paymentReason;
@@ -40,12 +40,12 @@ public class Payment {
         this.nic = nic;
     }
 
-    public int getCourseId() {
-        return courseId;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public BigDecimal getTotalFee() {
@@ -64,11 +64,11 @@ public class Payment {
         this.remaining = remaining;
     }
 
-    public int getPaymentReason() {
+    public String getPaymentReason() {
         return paymentReason;
     }
 
-    public void setPaymentReason(int paymentReason) {
+    public void setPaymentReason(String paymentReason) {
         this.paymentReason = paymentReason;
     }
 
@@ -80,11 +80,11 @@ public class Payment {
         this.paymentAmount = paymentAmount;
     }
 
-    public int getPaymentMethod() {
+    public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(int paymentMethod) {
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -117,7 +117,7 @@ public class Payment {
         return "Payment{" +
                 "receiptNumber=" + receiptNumber +
                 ", nic='" + nic + '\'' +
-                ", courseId=" + courseId +
+                ", courseName=" + courseName +
                 ", totalFee=" + totalFee +
                 ", remaining=" + remaining +
                 ", paymentReason=" + paymentReason +

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" stylesheets="@css/SecondaryFormsStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddPaymentFormController">
+<AnchorPane  fx:id="root" prefHeight="800.0" prefWidth="650.0" style="-fx-background-color: white;" stylesheets="@css/SecondaryFormsStyles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddPaymentFormController">
     <children>
         <AnchorPane layoutX="18.0" layoutY="17.0" prefHeight="678.0" prefWidth="614.0" style="-fx-border-color: #81D4FA; -fx-border-radius: 10;" />
         <VBox layoutX="24.0" layoutY="35.0" prefHeight="654.0" prefWidth="601.0" spacing="20.0">
@@ -27,7 +27,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 943245624V">
+                        <TextField fx:id="txtStudentNIC" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 943245624V">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -39,7 +39,7 @@
                 </HBox>
                 <HBox prefHeight="44.0" prefWidth="621.0">
                     <children>
-                        <Label prefHeight="20.0" prefWidth="210.0" text="Course ID:">
+                        <Label prefHeight="20.0" prefWidth="210.0" text="Course Name:">
                             <HBox.margin>
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
@@ -47,7 +47,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                  <ComboBox prefHeight="32.0" prefWidth="375.0" promptText="Direct Entry Program" style="-fx-background-color: #B3E5FC;">
+                  <ComboBox fx:id="cmbCourseName" prefHeight="32.0" prefWidth="375.0" promptText="Direct Entry Program" style="-fx-background-color: #B3E5FC;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -64,7 +64,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 300,000">
+                        <TextField fx:id="txtTotalFee" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 300,000">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -84,7 +84,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                  <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 120,000">
+                  <TextField fx:id="txtRemaining" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 120,000">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -104,7 +104,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
-                  <ComboBox prefHeight="32.0" prefWidth="375.0" promptText="Installment" style="-fx-background-color: #B3E5FC;">
+                  <ComboBox fx:id="cmbPaymentReason" prefHeight="32.0" prefWidth="375.0" promptText="Installment" style="-fx-background-color: #B3E5FC;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -121,7 +121,7 @@
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
                         </Label>
-                        <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 50,000">
+                        <TextField fx:id="txtPaymentAmount" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 50,000">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -141,7 +141,7 @@
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
                         </Label>
-                        <ComboBox prefHeight="32.0" prefWidth="375.0" promptText="Bank Deposit" style="-fx-background-color: #B3E5FC;">
+                        <ComboBox fx:id="cmbPaymentMethod" prefHeight="32.0" prefWidth="375.0" promptText="Bank Deposit" style="-fx-background-color: #B3E5FC;">
                             <HBox.margin>
                                 <Insets top="6.0" />
                             </HBox.margin>
@@ -161,7 +161,7 @@
                         <Insets left="10.0" top="12.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 234343254543">
+                  <TextField fx:id="txtRefNumber" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 234343254543">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -178,7 +178,7 @@
                                 <Insets left="10.0" top="12.0" />
                             </HBox.margin>
                         </Label>
-                  <TextField prefHeight="32.0" prefWidth="375.0" promptText="Eg: 70,000">
+                  <TextField fx:id="txtBalance" prefHeight="32.0" prefWidth="375.0" promptText="Eg: 70,000">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -195,7 +195,7 @@
                         <Insets left="10.0" top="12.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea prefHeight="53.0" prefWidth="376.0" promptText="Note goes here" />
+                  <TextArea fx:id="txtNote" prefHeight="53.0" prefWidth="376.0" promptText="Note goes here" />
                </children>
             </HBox>
             </children>

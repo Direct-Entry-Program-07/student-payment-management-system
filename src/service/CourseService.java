@@ -62,10 +62,11 @@ public class CourseService {
         throw new NotFoundException();
     }
 
-    public Boolean isCourseExists(String inputId) {
+    public Boolean isCourseExists(String inputCourseID, String inputBatchId) {
         for (Course course : courseDB) {
-            String[] rawCourseId = course.getCourseID().split("-");
-            if (rawCourseId[0].equals(inputId.trim())){
+            //String[] rawCourseId = course.getCourseID().split("-");
+            if (course.getCourseID().equals(inputCourseID.trim())){
+
                 return true;
             }
         }

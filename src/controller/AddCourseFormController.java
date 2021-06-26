@@ -17,6 +17,7 @@ import service.CourseService;
 import service.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 import static util.ValidationUtil.isValidDate;
@@ -49,7 +50,6 @@ public class AddCourseFormController {
                     new Alert(Alert.AlertType.ERROR, "Something terribly wrong, Please contact DEP)!", ButtonType.OK).show();
                 }
 
-
                 txtCourseId.setEditable(false);
                 txtCourseId.setText(course.getCourseID()+"-"+course.getBatchID());
                 txtCourseName.setText(course.getCourseName());
@@ -81,10 +81,17 @@ public class AddCourseFormController {
                     txtNote.getText()
             );
 
-            if (courseService.isCourseExists(txtCourseId.getText())){
-                new Alert(Alert.AlertType.ERROR, "Duplicated Course ID").show();
-                txtCourseId.requestFocus();
-                return;
+            if (courseService.isCourseExists(txtCourseId.getText(), txtBatchId.getText())){
+                Optional<ButtonType> buttonType = new Alert(Alert.AlertType.ERROR, "Course Already exists. Do you like to add new branch instead of creating new course?", ButtonType.YES,ButtonType.NO).showAndWait();
+                if (buttonType.get() == ButtonType.YES){
+                    int newBatch = Integer.parseInt(txtBatchId.getText()) + 1;
+                    txtBatchId.setText(String.valueOf(newBatch));
+                    //System.out.println(txtBatchId.getText());
+
+                }else {
+                    txtCourseId.requestFocus();
+                    return;
+                }
             }
 
             if (btnSave.getText().equals("Save Course")) {

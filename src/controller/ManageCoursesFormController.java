@@ -17,7 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import model.Course;
 import model.CourseTM;
 import service.CourseService;
@@ -89,6 +88,7 @@ public class ManageCoursesFormController {
         });
 
         LoadAllCourses("");
+
     }
 
     private void deleteCourse(CourseTM tm) {
@@ -129,8 +129,16 @@ public class ManageCoursesFormController {
     private void LoadAllCourses(String query) {
 
         tblCourses.getItems().clear();
+//        checkAlreadyInTable();
 
         for (Course course : courseService.findCourses(query)) {
+
+            int count = 0;
+            System.out.println(count);
+            if (count !=0){
+
+                checkAlreadyInTable(course.getCourseID());
+            }
             tblCourses.getItems().add(new CourseTM(
                     course.getCourseID(),
                     course.getCourseName(),
@@ -139,8 +147,17 @@ public class ManageCoursesFormController {
                     course.getBatchCommencingDate(),
                     course.getNote()));
 
-            System.out.println(course);
+           // System.out.println(course);
         }
+    }
+
+    private void checkAlreadyInTable(String id) {
+       // System.out.println("run");
+
+        CourseTM courseTM = tblCourses.getItems().get(0);
+       if (id == courseTM.getCourseID()){
+           System.out.println("equals");
+       }
     }
 
     public void btnAddCourse_OnAction(ActionEvent actionEvent) {
@@ -160,6 +177,9 @@ public class ManageCoursesFormController {
             ctrl.navigate("Add new Course", "/view/AddCourseForm.fxml", AppBarIcon.NAV_ICON_NONE);
 
             secondaryStage.show();
+            tblCourses.refresh();
+
+            txtQuery.requestFocus();
         } catch (IOException e) {
             e.printStackTrace();
         }
