@@ -126,7 +126,7 @@ public class ManagePaymentsFormController {
                     payment.getReceiptNumber(),
                     payment.getNic(),
                     payment.getStudentName(),
-                    String.valueOf(payment.getCourseId()),
+                    String.valueOf(payment.getCourseName()),
                     totalPayment,
                     payment.getBalance()
             ));

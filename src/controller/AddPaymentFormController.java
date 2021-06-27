@@ -86,12 +86,11 @@ public class AddPaymentFormController {
             if (btnSave.getText().equals("Save Payment")) {
                 paymentService.savePayment(payment);
             } else {
-                StudentTM tm = (StudentTM) root.getUserData();
-                tm.setFullName(txtStudentName.getText());
-                tm.setAddress(txtAddress.getText());
-                tm.setContactNumber(txtContactNumber.getText());
-                tm.setEmailAddress(txtEmailAddress.getText());
-                tm.setCourse(cmbCourseID.getValue() + "-" + cmbBatchID.getValue());
+                PaymentTM tm = (PaymentTM) root.getUserData();
+                tm.setNic(txtStudentNIC.getText());
+                tm.setStudentName("Student Name");
+                tm.setTotalFee(new BigDecimal(txtTotalFee.getText().toString()));
+                tm.setBalance(new BigDecimal(txtBalance.getText()));
                 paymentService.updatePayment(payment);
             }
             new Alert(Alert.AlertType.NONE, "Payment has been saved successfully", ButtonType.OK).show();
@@ -104,7 +103,7 @@ public class AddPaymentFormController {
 
     private boolean isValidated() {
         String nic = txtStudentNIC.getText();
-
+        return true;
     }
 
     public void btnCancel_OnAction(ActionEvent actionEvent) {
