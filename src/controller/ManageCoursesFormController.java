@@ -27,6 +27,8 @@ import util.AppBarIcon;
 import util.MaterialUI;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ManageCoursesFormController {
@@ -35,7 +37,11 @@ public class ManageCoursesFormController {
     public TextField txtQuery;
     public TableView<CourseTM> tblCourses;
     public JFXButton btnAddCourse;
-    ObservableList<String> cmbBatchIdOptions = FXCollections.observableArrayList();
+    //ObservableList<String> cmbBatchIdOptions = FXCollections.observableArrayList();
+    TableColumn<CourseTM, String> firstColumn ;
+
+    ObservableList<String> batchIdOptions = FXCollections.observableArrayList();
+
 
     public void initialize() {
 
@@ -52,7 +58,7 @@ public class ManageCoursesFormController {
             batchId.setPrefWidth(tblCourses.getColumns().get(2).getWidth());
             batchId.setPrefHeight(40);
 
-            batchId.setItems(cmbBatchIdOptions);
+            batchId.setItems(batchIdOptions);
 
            tblCourses.getColumns().get(2).widthProperty().addListener(new ChangeListener<Number>() {
                @Override
@@ -155,6 +161,27 @@ public class ManageCoursesFormController {
            // System.out.println(course);
         }
 
+        ObservableList<CourseTM> items = tblCourses.getItems();
+
+        List<String> firstColumnData = new ArrayList<>();
+       // System.out.println(items.get(0).getCourseID());
+        System.out.println(tblCourses.getItems().size());
+
+        for (int i = 0; i < tblCourses.getItems().size(); i++) {
+
+            if (firstColumnData.contains(items.get(i).getCourseID())){
+                int newBatchId = items.get(i).getBatchID();
+                System.out.println(newBatchId);
+                int origin = firstColumnData.indexOf(items.get(i).getCourseID());
+                ComboBox batchIdCell = (ComboBox) tblCourses.getColumns().get(2).getCellObservableValue(origin).getValue();
+                batchIdOptions.add(String.valueOf(newBatchId));
+                System.out.println(batchIdOptions);
+                batchIdCell.setItems(batchIdOptions);
+            }else {
+                firstColumnData.add(items.get(i).getCourseID());
+                System.out.println(firstColumnData.get(i));
+            }
+        }
     }
 
     private void checkAlreadyInTable(String id) {
