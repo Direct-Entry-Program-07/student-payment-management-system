@@ -11,13 +11,10 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.Payment;
 import model.PaymentTM;
-import model.Student;
-import model.StudentTM;
-import service.CourseService;
 import service.PaymentService;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 public class AddPaymentFormController {
     public JFXButton btnSave;
@@ -40,7 +37,7 @@ public class AddPaymentFormController {
     ObservableList<String> paymentMethod = FXCollections.observableArrayList();
 
 
-    public void initialize(){
+    public void initialize() {
         Platform.runLater(() -> {
 
             if (root.getUserData() != null) {
@@ -74,12 +71,12 @@ public class AddPaymentFormController {
                     txtStudentNIC.getText(),
                     "Student Name",
                     (String) cmbCourseName.getValue(),
-                    new BigDecimal(txtTotalFee.getText().toString()),
-                    new BigDecimal(txtRemaining.getText().toString()),
-                    (String)cmbPaymentReason.getValue(),
-                    new BigDecimal(txtPaymentAmount.getText().toString()),
-                    (String)cmbPaymentMethod.getValue(),
-                    new BigDecimal(txtBalance.getText().toString()),
+                    new BigDecimal(txtTotalFee.getText()),
+                    new BigDecimal(txtRemaining.getText()),
+                    (String) cmbPaymentReason.getValue(),
+                    new BigDecimal(txtPaymentAmount.getText()),
+                    (String) cmbPaymentMethod.getValue(),
+                    new BigDecimal(txtBalance.getText()),
                     txtNote.getText()
             );
 
@@ -89,7 +86,7 @@ public class AddPaymentFormController {
                 PaymentTM tm = (PaymentTM) root.getUserData();
                 tm.setNic(txtStudentNIC.getText());
                 tm.setStudentName("Student Name");
-                tm.setTotalFee(new BigDecimal(txtTotalFee.getText().toString()));
+                tm.setTotalFee(new BigDecimal(txtTotalFee.getText()));
                 tm.setBalance(new BigDecimal(txtBalance.getText()));
                 paymentService.updatePayment(payment);
             }
@@ -103,7 +100,60 @@ public class AddPaymentFormController {
 
     private boolean isValidated() {
         String nic = txtStudentNIC.getText();
-        return true;
+        System.out.println((String) cmbCourseName.getValue());
+        String courseName = (String) cmbCourseName.getValue();
+        String totalFee = txtTotalFee.getText();
+        String remaining = txtRemaining.getText();
+        BigDecimal bigOfRemain = new BigDecimal(txtRemaining.getText());
+        String reasonToPay = cmbPaymentReason.getValue().toString();
+        String payment = txtPaymentAmount.getText();
+        BigDecimal bigOfPayment = new BigDecimal(txtPaymentAmount.getText());
+        String paymentMethod = cmbPaymentMethod.getValue().toString();
+        String refNumber = txtRefNumber.getText();
+        String balance = txtBalance.getText();
+        BigDecimal bigBalance = new BigDecimal(txtBalance.getText());
+
+        Pattern nicPattern1 = Pattern.compile("(\\d{9}V)|(\\d{9}v)");
+        Pattern nicPattern2 = Pattern.compile("\\d{12}");
+        Pattern bigDecimalPattern = Pattern.compile("[0-9]+[,]*");
+        Pattern refNumberPattern = Pattern.compile("\\d");
+
+
+        if (!(nicPattern1.matcher(nic).matches() || nicPattern2.matcher(nic).matches())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid NIC").show();
+            txtStudentNIC.requestFocus();
+            return false;
+        } else if (courseName.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Please select a course Name").show();
+            cmbCourseName.requestFocus();
+            return false;
+        } else if (!(bigDecimalPattern.matcher(totalFee).matches())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Course fee").show();
+            txtTotalFee.requestFocus();
+            return false;
+        } else if (reasonToPay.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Please select a Reason to pay").show();
+            cmbPaymentReason.requestFocus();
+            return false;
+        } else if (!(bigDecimalPattern.matcher(totalFee).matches())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid amount").show();
+            txtPaymentAmount.requestFocus();
+            return false;
+        } else if (bigOfPayment.compareTo(bigOfRemain) > 0) {
+            new Alert(Alert.AlertType.ERROR, "Check the amount. Payment amount can't be higher than the remaining amount").show();
+            txtPaymentAmount.requestFocus();
+            return false;
+        } else if (paymentMethod.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Please select a payment method").show();
+            cmbPaymentReason.requestFocus();
+            return false;
+        }else if ((paymentMethod.equals("Bank Deposit")) && refNumber.equals("")){
+            new Alert(Alert.AlertType.ERROR, "Please Add the Reference Number of the Slip").show();
+            cmbPaymentReason.requestFocus();
+            return false;
+        }
+
+        return false;
     }
 
     public void btnCancel_OnAction(ActionEvent actionEvent) {
