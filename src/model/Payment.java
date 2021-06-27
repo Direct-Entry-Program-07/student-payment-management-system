@@ -1,11 +1,13 @@
 package model;
 
+import javafx.collections.ObservableList;
+
 import java.math.BigDecimal;
 
 public class Payment {
     private String receiptNumber;
     private String nic;
-    private String courseName;
+    private ObservableList<String> courseName;
     private BigDecimal totalFee;
     private BigDecimal remaining;
     private String paymentReason;
@@ -18,7 +20,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(String receiptNumber, String nic, String studentName, String courseName, BigDecimal totalFee, BigDecimal remaining, String paymentReason, BigDecimal paymentAmount, String paymentMethod, BigDecimal balance, String note) {
+    public Payment(String receiptNumber, String nic, String studentName, ObservableList<String > courseName, BigDecimal totalFee, BigDecimal remaining, String paymentReason, BigDecimal paymentAmount, String paymentMethod, BigDecimal balance, String note) {
         this.receiptNumber = receiptNumber;
         this.nic = nic;
         this.studentName = studentName;
@@ -40,11 +42,11 @@ public class Payment {
         this.nic = nic;
     }
 
-    public String getCourseName() {
+    public ObservableList<String> getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setCourseName(ObservableList courseName) {
         this.courseName = courseName;
     }
 

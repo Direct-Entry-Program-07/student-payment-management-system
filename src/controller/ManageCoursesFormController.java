@@ -12,11 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import model.Course;
 import model.CourseTM;
 import service.CourseService;
@@ -37,6 +39,7 @@ public class ManageCoursesFormController {
 
     public void initialize() {
 
+        //cmbBatchIdOptions.add("1");
 
 
         MaterialUI.paintTextFields(txtQuery);
@@ -49,6 +52,8 @@ public class ManageCoursesFormController {
             batchId.setPrefWidth(tblCourses.getColumns().get(2).getWidth());
             batchId.setPrefHeight(40);
 
+            batchId.setItems(cmbBatchIdOptions);
+
            tblCourses.getColumns().get(2).widthProperty().addListener(new ChangeListener<Number>() {
                @Override
                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -58,7 +63,7 @@ public class ManageCoursesFormController {
 
            });
 
-           batchId.setValue("batchID");
+           //batchId.setValue("batchID");
 
             return new ReadOnlyObjectWrapper<>(batchId);
         });
@@ -134,7 +139,7 @@ public class ManageCoursesFormController {
         for (Course course : courseService.findCourses(query)) {
 
             int count = 0;
-            System.out.println(count);
+           // System.out.println(count);
             if (count !=0){
 
                 checkAlreadyInTable(course.getCourseID());
@@ -149,6 +154,7 @@ public class ManageCoursesFormController {
 
            // System.out.println(course);
         }
+
     }
 
     private void checkAlreadyInTable(String id) {

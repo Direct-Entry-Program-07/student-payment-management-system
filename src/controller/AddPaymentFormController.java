@@ -37,13 +37,18 @@ public class AddPaymentFormController {
     ObservableList<String> paymentMethod = FXCollections.observableArrayList();
 
 
+
     public void initialize() {
+
+        courseNames.add("DEP");
+        courseNames.add("ABSD");
+        courseNames.add("GDSE");
+
         Platform.runLater(() -> {
 
             if (root.getUserData() != null) {
                 PaymentTM tm = (PaymentTM) root.getUserData();
                 Payment payment = paymentService.findPayment(tm.getReceiptNumber());
-
 
                 txtStudentNIC.setText(payment.getNic());
                 cmbCourseName.setItems(courseNames);
@@ -70,7 +75,7 @@ public class AddPaymentFormController {
                     txtRefNumber.getText(),
                     txtStudentNIC.getText(),
                     "Student Name",
-                    (String) cmbCourseName.getValue(),
+                    courseNames,
                     new BigDecimal(txtTotalFee.getText()),
                     new BigDecimal(txtRemaining.getText()),
                     (String) cmbPaymentReason.getValue(),
