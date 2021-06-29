@@ -1,8 +1,12 @@
-import controller.MainFormController;
-import javafx.application.Application;
+package controller;
+
+import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -11,16 +15,18 @@ import util.AppBarIcon;
 
 import java.io.IOException;
 
-public class AppInitializer extends Application {
+public class LoginScreenFormController {
+    public JFXButton btnLogin;
+    public JFXButton btnCancel;
+    public TextField txtPassword;
+    public TextField txtUserName;
+    public AnchorPane root;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public void btnLogin_OnAction(ActionEvent actionEvent) throws IOException {
 
-    @Override
-    public void start(Stage primaryStage) throws IOException {
 
-        /*FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainForm.fxml"));
+        Stage primaryStage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainForm.fxml"));
         Parent root = fxmlLoader.load();
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
@@ -31,14 +37,15 @@ public class AppInitializer extends Application {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("Student Payment Management System");
         primaryStage.show();
-        primaryStage.centerOnScreen();*/
-
-        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/SplashScreenForm.fxml"));
-        Scene scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setScene(scene);
-        primaryStage.show();
         primaryStage.centerOnScreen();
+
+        Platform.runLater(()->{
+            ((Stage)(btnLogin.getScene().getWindow())).close();
+        });
+
+    }
+
+    public void btnCancel_OnAction(ActionEvent actionEvent) {
+
     }
 }
