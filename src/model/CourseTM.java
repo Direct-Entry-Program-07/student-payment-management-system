@@ -7,6 +7,7 @@ public class CourseTM {
     private String courseName;
     private Batch selectedBatch;
     private int noOfStudentsForTheBatch;
+    private int totalStudents;
     private LocalDate batchCommencingDate;
     private String note;
 
@@ -22,6 +23,15 @@ public class CourseTM {
         this.setNote(note);
     }
 
+    public CourseTM(String courseID, String courseName, Batch selectedBatch, int noOfStudentsForTheBatch, int totalStudents, LocalDate batchCommencingDate, String note) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.selectedBatch = selectedBatch;
+        this.noOfStudentsForTheBatch = noOfStudentsForTheBatch;
+        this.totalStudents = totalStudents;
+        this.batchCommencingDate = batchCommencingDate;
+        this.note = note;
+    }
 
     public String getCourseID() {
         return courseID;
@@ -76,5 +86,25 @@ public class CourseTM {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public int getTotalStudents() {
+        return totalStudents;
+    }
+
+    public void setTotalStudents(int totalStudents) {
+        this.totalStudents = totalStudents;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseTM{" +
+                "courseID='" + courseID + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", selectedBatch=" + selectedBatch +
+                ", noOfStudentsForTheBatch=" + noOfStudentsForTheBatch +
+                ", batchCommencingDate=" + batchCommencingDate +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

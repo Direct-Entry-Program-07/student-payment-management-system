@@ -6,14 +6,16 @@ public class Batch {
     private String id;
     private int studentCount;
     private LocalDate commencingDate;
+    private String note;
 
     public Batch() {
     }
 
-    public Batch(String id, int studentCount, LocalDate commencingDate) {
+    public Batch(String id, int studentCount, LocalDate commencingDate, String note) {
         this.setId(id);
         this.setStudentCount(studentCount);
         this.setCommencingDate(commencingDate);
+        this.setNote(note);
     }
 
 
@@ -39,6 +41,15 @@ public class Batch {
 
     public void setCommencingDate(LocalDate commencingDate) {
         this.commencingDate = commencingDate;
+    }
+
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override

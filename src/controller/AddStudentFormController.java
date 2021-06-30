@@ -67,30 +67,6 @@ public class AddStudentFormController {
             }
         });
 
-        for (Object allCourses : courseService.getAllCourses()) {
-            String s = allCourses.toString();
-            if (cmbCourseOptions.contains(s)){
-                continue;
-            }
-            cmbCourseOptions.add(s);
-        }
-
-        cmbCourseID.setItems(cmbCourseOptions);
-
-       cmbCourseID.valueProperty().addListener(new ChangeListener() {
-           @Override
-           public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-               cmbBatchOptions.clear();
-
-               String selectedCourse = newValue.toString();
-               List batches = courseService.getCorrespondingBatches(selectedCourse);
-               for (Object batch : batches) {
-                   String s = batch.toString();
-                   cmbBatchOptions.add(s);
-               }
-               cmbBatchID.setItems(cmbBatchOptions);
-           }
-       });
     }
 
     public void btnSave_OnAction(ActionEvent actionEvent) {

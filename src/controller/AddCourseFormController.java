@@ -51,11 +51,11 @@ public class AddCourseFormController {
                 }
 
                 txtCourseId.setEditable(false);
-                txtCourseId.setText(course.getCourseID()+"-"+course.getBatchID());
+              //  txtCourseId.setText(course.getCourseID()+"-"+course.getBatchID());
                 txtCourseName.setText(course.getCourseName());
                 txtBatchId.setEditable(false);
                 btnCreateANewBatch.setDisable(true);
-                txtBatchId.setText(String.valueOf(course.getBatchID()));
+              //  txtBatchId.setText(String.valueOf(course.getBatchID()));
                 txtNoOfStudents.setText(String.valueOf(course.getNoOfStudentsForTheBatch()));
                 pckrCommencingDate.setValue(LocalDate.parse(pckrCommencingDate.getValue().toString()));
                 txtNote.setText(course.getNote());
@@ -67,7 +67,7 @@ public class AddCourseFormController {
 
     public void btnSave_OnAction(ActionEvent actionEvent) {
 
-        if (!isValidated()){
+        /*if (!isValidated()){
             return;
         }
 
@@ -110,7 +110,7 @@ public class AddCourseFormController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
+*/
     }
 
     public void btnCancel_OnAction(ActionEvent actionEvent) {

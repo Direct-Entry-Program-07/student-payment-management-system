@@ -26,9 +26,7 @@ import util.AppBarIcon;
 import util.MaterialUI;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ManageCoursesFormController {
 
@@ -125,6 +123,7 @@ public class ManageCoursesFormController {
 
         LoadAllCourses("");
 
+
     }
 
     private void deleteCourse(CourseTM tm) {
@@ -166,13 +165,28 @@ public class ManageCoursesFormController {
 
         tblCourses.getItems().clear();
 
+        Set<String> allCourses = courseService.getAllCourses();
+
+        //System.out.println(allCourses);
+
+        loop1:
         for (Course course : courseService.findCourses(query)) {
-            tblCourses.getItems().add(new CourseTM(
-                    course.getCourseID(),
-                    course.getCourseName(),
-                    course.getBatchID()
-            ));
-        }
+
+
+                    tblCourses.getItems().add(new CourseTM(
+                            course.getCourseID(),
+                            course.getCourseName(),
+                            course.getSelectedBatch(),
+                            course.getSelectedBatch().getStudentCount(),
+                            course.getSelectedBatch().getCommencingDate(),
+                            course.getSelectedBatch().getNote()
+                    ));
+
+                    continue loop1;
+            }
+
+
+       // System.out.println(tblCourses.toString());
 
 //        checkAlreadyInTable();
 

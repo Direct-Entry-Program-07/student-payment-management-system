@@ -1,27 +1,35 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class Course {
     private String courseID;
     private String courseName;
-    private int batchID;
+    private Batch selectedBatch;
     private int noOfStudentsForTheBatch;
     private LocalDate batchCommencingDate;
     private String note;
+    private boolean isDuplicated = false;
 
     public Course() {
     }
 
-    public Course(String courseID, String courseName, int batchID, int noOfStudentsForTheBatch, LocalDate batchCommencingDate, String note) {
+    public Course(String courseID, String courseName, Batch selectedBatch) {
         this.courseID = courseID;
         this.courseName = courseName;
-        this.batchID = batchID;
-        this.noOfStudentsForTheBatch = noOfStudentsForTheBatch;
-        this.batchCommencingDate = batchCommencingDate;
-        this.note = note;
+        this.selectedBatch = selectedBatch;
     }
+
+    public Course(String courseID, String courseName, Batch selectedBatch, int noOfStudentsForTheBatch, LocalDate batchCommencingDate, String note) {
+
+        this.setCourseID(courseID);
+        this.setCourseName(courseName);
+        this.setSelectedBatch(selectedBatch);
+        this.setNoOfStudentsForTheBatch(noOfStudentsForTheBatch);
+        this.setBatchCommencingDate(batchCommencingDate);
+        this.setNote(note);
+    }
+
 
     public String getCourseID() {
         return courseID;
@@ -39,13 +47,12 @@ public class Course {
         this.courseName = courseName;
     }
 
-
-    public int getBatchID() {
-        return batchID;
+    public Batch getSelectedBatch() {
+        return selectedBatch;
     }
 
-    public void setBatchID(int batchID) {
-        this.batchID = batchID;
+    public void setSelectedBatch(Batch selectedBatch) {
+        this.selectedBatch = selectedBatch;
     }
 
     public int getNoOfStudentsForTheBatch() {
@@ -77,10 +84,18 @@ public class Course {
         return "Course{" +
                 "courseID='" + courseID + '\'' +
                 ", courseName='" + courseName + '\'' +
-                ", batchID=" + batchID +
+                ", selectedBatch=" + selectedBatch +
                 ", noOfStudentsForTheBatch=" + noOfStudentsForTheBatch +
                 ", batchCommencingDate=" + batchCommencingDate +
                 ", note='" + note + '\'' +
                 '}';
+    }
+
+    public boolean isDuplicated() {
+        return true;
+    }
+
+    public void setDuplicated(boolean duplicated) {
+        isDuplicated = duplicated;
     }
 }
