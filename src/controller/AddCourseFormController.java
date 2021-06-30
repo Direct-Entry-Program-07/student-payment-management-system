@@ -3,6 +3,8 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import model.Batch;
 import model.Course;
 import model.CourseTM;
 import service.CourseService;
@@ -63,23 +66,48 @@ public class AddCourseFormController {
                 btnSave.setText("Update Course");
             }
         });
+
+        txtCourseId.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue && !txtCourseId.getText().equals("")){
+
+                    if (courseService.isCourseExists(txtCourseId.getText(), txtBatchId.getText())){
+                        Optional<ButtonType> buttonType = new Alert(Alert.AlertType.ERROR, "Course Already exists. Do you like to add new branch instead of creating new course?", ButtonType.YES,ButtonType.NO).showAndWait();
+                        if (buttonType.get() == ButtonType.YES){
+                            int newBatch = Integer.parseInt(txtBatchId.getText()) + 1;
+                            txtBatchId.setText(String.valueOf(newBatch));
+                            //System.out.println(txtBatchId.getText());
+
+                            txtCourseName.setText(courseService.getCourseNameUsingId(txtCourseId.getText()));
+                            txtNoOfStudents.requestFocus();
+
+                        }else {
+                            txtCourseId.requestFocus();
+                            return;
+                        }
+                    }
+                }
+            }
+        });
+
+
     }
 
     public void btnSave_OnAction(ActionEvent actionEvent) {
 
-        /*if (!isValidated()){
+        if (!isValidated()){
             return;
         }
 
         try {
             Course course = new Course(
-                    txtCourseId.getText()+"-"+txtBatchId.getText(),
+                    txtCourseId.getText(),
                     txtCourseName.getText(),
-                    Integer.parseInt(txtBatchId.getText()),
-                    Integer.parseInt(txtNoOfStudents.getText()),
-                    LocalDate.parse(pckrCommencingDate.getValue().toString()),
-                    txtNote.getText()
+                    new Batch(txtBatchId.getText(), Integer.parseInt(txtNoOfStudents.getText()), LocalDate.parse(pckrCommencingDate.getValue().toString()), txtNote.getText())
             );
+
+
 
             if (courseService.isCourseExists(txtCourseId.getText(), txtBatchId.getText())){
                 Optional<ButtonType> buttonType = new Alert(Alert.AlertType.ERROR, "Course Already exists. Do you like to add new branch instead of creating new course?", ButtonType.YES,ButtonType.NO).showAndWait();
@@ -100,17 +128,13 @@ public class AddCourseFormController {
 
                 CourseTM tm = (CourseTM) root.getUserData();
                 tm.setCourseName(txtCourseName.getText());
-                tm.setBatchID(Integer.parseInt(txtBatchId.getText()));
-                tm.setNoOfStudentsForTheBatch(Integer.parseInt(txtNoOfStudents.getText()));
-                tm.setBatchCommencingDate(LocalDate.parse(pckrCommencingDate.getValue().toString()));
-                tm.setNote(txtNote.getText());
+                tm.setSelectedBatch(new Batch(txtBatchId.getText(), Integer.parseInt(txtNoOfStudents.getText()), LocalDate.parse(pckrCommencingDate.getValue().toString()), txtNote.getText()));
                 courseService.updateCourse(course);
             }
             new Alert(Alert.AlertType.NONE, "Course has been saved successfully", ButtonType.OK).show();
         }catch (Exception e){
             e.printStackTrace();
         }
-*/
     }
 
     public void btnCancel_OnAction(ActionEvent actionEvent) {
@@ -128,11 +152,11 @@ public class AddCourseFormController {
         String courseName = txtCourseName.getText();
         String batchId = txtBatchId.getText();
         String noOfStudentsForTheBatch = txtNoOfStudents.getText();
-        String commencingDate = pckrCommencingDate.getValue().toString();
+        String commencingDate = "1999-09-09";/////////////////+++++++++++++++////////////////
         String note = txtNote.getText();
 
         Pattern courseIdPattern = Pattern.compile("[A-Za-z]+");
-        Pattern courseNamePattern = Pattern.compile("[A-Za-z]+");
+        Pattern courseNamePattern = Pattern.compile("[A-Za-z ]+");
         Pattern batchIdPattern = Pattern.compile("\\d{1,2}");
         Pattern noStudentPattern = Pattern.compile("\\d{1,3}");
 

@@ -5,13 +5,13 @@ import model.Course;
 import service.exception.NotFoundException;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CourseService {
     private static final List<Course> courseDB = new ArrayList<>();
-
-    public void initialize(){
-    }
 
     static {
         // add dummy data to course table
@@ -30,11 +30,14 @@ public class CourseService {
 
     }
 
-    public CourseService(){
+    public CourseService() {
 
     }
 
-    public void saveCourse(Course course){
+    public void initialize() {
+    }
+
+    public void saveCourse(Course course) {
         courseDB.add(course);
     }
 
@@ -49,13 +52,13 @@ public class CourseService {
 
     }
 
-    public List<Course> findAllCourses(){
+    public List<Course> findAllCourses() {
         return courseDB;
     }
 
     public Course findCourse(String courseId) throws NotFoundException {
         for (Course course : courseDB) {
-            if (course.getCourseID().equals(courseId)){
+            if (course.getCourseID().equals(courseId)) {
                 return course;
             }
         }
@@ -65,7 +68,7 @@ public class CourseService {
     public Boolean isCourseExists(String inputCourseID, String inputBatchId) {
         for (Course course : courseDB) {
             //String[] rawCourseId = course.getCourseID().split("-");
-            if (course.getCourseID().equals(inputCourseID.trim())){
+            if (course.getCourseID().equals(inputCourseID.trim()) && course.getSelectedBatch().getId().equals(inputBatchId.trim())) {
 
                 return true;
             }
@@ -73,7 +76,7 @@ public class CourseService {
         return false;
     }
 
-    public List<Course> findCourses(String query){
+    public List<Course> findCourses(String query) {
 /*
         Set<String> courseSet = new HashSet<String>();
 
@@ -86,13 +89,32 @@ public class CourseService {
         for (Course course : courseDB) {
 
             if (course.getCourseName().contains(query) ||
-                course.getCourseID().contains(query)){
+                    course.getCourseID().contains(query)) {
                 result.add(course);
             }
 
         }
-        System.out.println(result);
+        //System.out.println(result);
+        Set<Course> filteredSet = findDuplicates(result);
+        List<Course> filteredList = new ArrayList<>(filteredSet);
+        filteredList.addAll(filteredSet);
         return result;
+    }
+
+    public Set<Course> findDuplicates(List<Course> listContainingDuplicates) {
+        final Set<Course> duplicateCourseIds = new HashSet<>();
+        final Set<Course> notDuplicates = new HashSet<>();
+        final Set<Course> set1 = new HashSet<>();
+
+        for (Course courseList : listContainingDuplicates) {
+            if (!set1.add(courseList)) {
+                duplicateCourseIds.add(courseList);
+            } else {
+                notDuplicates.add(courseList);
+            }
+        }
+        System.out.println(notDuplicates);
+        return notDuplicates;
     }
 
     public Set<String> getAllCourses() {
@@ -105,5 +127,14 @@ public class CourseService {
         //System.out.println(courseSet);
 
         return courseSet;
+    }
+
+    public String getCourseNameUsingId(String id) {
+        for (Course course : courseDB) {
+            if (course.getCourseID().equals(id)){
+                return course.getCourseName();
+            }
+        }
+        return null;
     }
 }

@@ -66,7 +66,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtBatchId" prefHeight="32.0" prefWidth="153.0" promptText="Eg: 0742563248" text="01">
+                  <TextField fx:id="txtBatchId" prefHeight="32.0" prefWidth="153.0" promptText="Eg: 0742563248" text="1">
                      <font>
                         <Font size="16.0" />
                      </font>
