@@ -1,12 +1,11 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class CourseTM {
     private String courseID;
     private String courseName;
-    private int BatchID;
+    private Batch selectedBatch;
     private int noOfStudentsForTheBatch;
     private LocalDate batchCommencingDate;
     private String note;
@@ -14,14 +13,15 @@ public class CourseTM {
     public CourseTM() {
     }
 
-    public CourseTM(String courseID, String courseName, int batchID, int noOfStudentsForTheBatch, LocalDate batchCommencingDate, String note) {
-        this.courseID = courseID;
-        this.courseName = courseName;
-        BatchID = batchID;
-        this.noOfStudentsForTheBatch = noOfStudentsForTheBatch;
-        this.batchCommencingDate = batchCommencingDate;
-        this.note = note;
+    public CourseTM(String courseID, String courseName, Batch selectedBatch, int noOfStudentsForTheBatch, LocalDate batchCommencingDate, String note) {
+        this.setCourseID(courseID);
+        this.setCourseName(courseName);
+        this.setSelectedBatch(selectedBatch);
+        this.setNoOfStudentsForTheBatch(noOfStudentsForTheBatch);
+        this.setBatchCommencingDate(batchCommencingDate);
+        this.setNote(note);
     }
+
 
     public String getCourseID() {
         return courseID;
@@ -39,29 +39,35 @@ public class CourseTM {
         this.courseName = courseName;
     }
 
-
-    public int getBatchID() {
-        return BatchID;
+    public Batch getSelectedBatch() {
+        return selectedBatch;
     }
 
-    public void setBatchID(int batchID) {
-        BatchID = batchID;
+    public void setSelectedBatch(Batch selectedBatch) {
+        this.selectedBatch = selectedBatch;
     }
 
     public int getNoOfStudentsForTheBatch() {
-        return noOfStudentsForTheBatch;
+        if (selectedBatch == null){
+            return 0;
+        }
+        return selectedBatch.getStudentCount();
     }
 
     public void setNoOfStudentsForTheBatch(int noOfStudentsForTheBatch) {
-        this.noOfStudentsForTheBatch = noOfStudentsForTheBatch;
+        this.selectedBatch.setStudentCount(noOfStudentsForTheBatch);
     }
 
     public LocalDate getBatchCommencingDate() {
-        return batchCommencingDate;
+        if (selectedBatch == null){
+            return LocalDate.parse("1111-11-11");
+        }
+
+        return selectedBatch.getCommencingDate();
     }
 
     public void setBatchCommencingDate(LocalDate batchCommencingDate) {
-        this.batchCommencingDate = batchCommencingDate;
+        this.selectedBatch.setCommencingDate(batchCommencingDate);
     }
 
     public String getNote() {
@@ -70,17 +76,5 @@ public class CourseTM {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    @Override
-    public String toString() {
-        return "CourseTM{" +
-                "courseID='" + courseID + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", BatchID=" + BatchID +
-                ", noOfStudentsForTheBatch=" + noOfStudentsForTheBatch +
-                ", batchCommencingDate=" + batchCommencingDate +
-                ", note='" + note + '\'' +
-                '}';
     }
 }
