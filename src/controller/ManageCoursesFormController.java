@@ -26,7 +26,10 @@ import util.AppBarIcon;
 import util.MaterialUI;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 public class ManageCoursesFormController {
 
@@ -57,7 +60,7 @@ public class ManageCoursesFormController {
             cmbBatch.setPrefWidth(tblCourses.getColumns().get(2).getWidth());
             cmbBatch.setPrefHeight(40);
 
-           // batchId.setItems(batchIdOptions);
+            // batchId.setItems(batchIdOptions);
 
             tblCourses.getColumns().get(2).widthProperty().addListener(new ChangeListener<Number>() {
                 @Override
@@ -66,7 +69,7 @@ public class ManageCoursesFormController {
                 }
             });
 
-            switch (param.getValue().getCourseName()){
+            switch (param.getValue().getCourseName()) {
                 case "DEP":
                     cmbBatch.getItems().addAll(cmjdBatches);
                     break;
@@ -84,7 +87,7 @@ public class ManageCoursesFormController {
                     break;
             }
 
-            if (param.getValue().getSelectedBatch() != null){
+            if (param.getValue().getSelectedBatch() != null) {
                 cmbBatch.setValue(param.getValue().getSelectedBatch());
             }
 
@@ -167,26 +170,19 @@ public class ManageCoursesFormController {
 
         Set<String> allCourses = courseService.getAllCourses();
 
-        //System.out.println(allCourses);
-
-        loop1:
         for (Course course : courseService.findCourses(query)) {
 
+            tblCourses.getItems().add(new CourseTM(
+                    course.getCourseID(),
+                    course.getCourseName(),
+                    course.getSelectedBatch(),
+                    course.getSelectedBatch().getStudentCount(),
+                    course.getSelectedBatch().getCommencingDate(),
+                    course.getSelectedBatch().getNote()
+            ));
+        }
 
-                    tblCourses.getItems().add(new CourseTM(
-                            course.getCourseID(),
-                            course.getCourseName(),
-                            course.getSelectedBatch(),
-                            course.getSelectedBatch().getStudentCount(),
-                            course.getSelectedBatch().getCommencingDate(),
-                            course.getSelectedBatch().getNote()
-                    ));
-
-                    continue loop1;
-            }
-
-
-       // System.out.println(tblCourses.toString());
+        // System.out.println(tblCourses.toString());
 
 //        checkAlreadyInTable();
 
@@ -230,7 +226,6 @@ public class ManageCoursesFormController {
                 System.out.println(firstColumnData.get(i));
             }
         }*/
-
 
     }
 

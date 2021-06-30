@@ -74,11 +74,13 @@ public class CourseService {
     }
 
     public List<Course> findCourses(String query){
+/*
         Set<String> courseSet = new HashSet<String>();
 
         for (Course course : courseDB) {
             courseSet.add(course.getCourseID());
         }
+*/
 
         List<Course> result = new ArrayList<>();
         for (Course course : courseDB) {
@@ -89,9 +91,7 @@ public class CourseService {
             }
 
         }
-
-
-
+        System.out.println(result);
         return result;
     }
 
