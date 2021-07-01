@@ -12,6 +12,7 @@ import java.util.Set;
 
 public class CourseService {
     private static final List<Course> courseDB = new ArrayList<>();
+    private Set<String> coursesList = new HashSet<>();
 
     static {
         // add dummy data to course table
@@ -20,13 +21,13 @@ public class CourseService {
         Course c3 = new Course("CMJD", "CMJD Professional", new Batch("1", 30, LocalDate.of(2021, 3, 3), "Note 3"));
         Course c4 = new Course("ABSD", "Advanced Business Solution Developer", new Batch("1", 40, LocalDate.of(2021, 3, 3), "Note 4"));
         Course c5 = new Course("RWAD", "Rapid Web App Developer", new Batch("1", 25, LocalDate.of(2021, 3, 3), "Note 5"));
-        Course c6 = new Course("DEP", "Direct Entry Program", new Batch("2", 35, LocalDate.of(2021, 10, 3), "Note 6"));
+       // Course c6 = new Course("DEP", "Direct Entry Program", new Batch("2", 35, LocalDate.of(2021, 10, 3), "Note 6"));
         courseDB.add(c1);
         courseDB.add(c2);
         courseDB.add(c3);
         courseDB.add(c4);
         courseDB.add(c5);
-        courseDB.add(c6);
+       // courseDB.add(c6);
 
     }
 
@@ -35,10 +36,39 @@ public class CourseService {
     }
 
     public void initialize() {
+
     }
 
     public void saveCourse(Course course) {
-        courseDB.add(course);
+        boolean isDuplicatedFound = false;
+
+        for (Course c : courseDB) {
+            coursesList.add(c.getCourseID());
+        }
+
+        System.out.println(coursesList);
+
+
+        if (coursesList.isEmpty()) {
+            courseDB.add(course);
+            coursesList.add(course.getCourseID());
+            return;
+        } else {
+            for (String s : coursesList) {
+
+                if (course.getCourseID().equals(s)) {
+                   isDuplicatedFound = true;
+                }
+            }
+
+            if (!isDuplicatedFound){
+                courseDB.add(course);
+                coursesList.add(course.getCourseID());
+            }
+        }
+
+        //System.out.println(coursesList);
+
     }
 
     public void updateCourse(Course course) throws NotFoundException {
@@ -113,7 +143,7 @@ public class CourseService {
                 notDuplicates.add(courseList);
             }
         }
-        System.out.println(notDuplicates);
+       // System.out.println(notDuplicates);
         return notDuplicates;
     }
 
@@ -131,7 +161,7 @@ public class CourseService {
 
     public String getCourseNameUsingId(String id) {
         for (Course course : courseDB) {
-            if (course.getCourseID().equals(id)){
+            if (course.getCourseID().equals(id)) {
                 return course.getCourseName();
             }
         }
