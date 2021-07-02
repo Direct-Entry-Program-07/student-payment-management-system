@@ -75,7 +75,7 @@ public class AddPaymentFormController {
                     txtRefNumber.getText(),
                     txtStudentNIC.getText(),
                     "Student Name",
-                    courseNames,
+                    "DEP",
                     new BigDecimal(txtTotalFee.getText()),
                     new BigDecimal(txtRemaining.getText()),
                     (String) cmbPaymentReason.getValue(),

@@ -16,13 +16,13 @@ public class PaymentService {
 
     static {
         courseList.add("DEP");
-        courseList.add("GDSE");
-        courseList.add("ABSD");
-        courseList.add("ABSD");
+       // courseList.add("GDSE");
+       // courseList.add("ABSD");
+       // courseList.add("ABSD");
 
         //Add dummy data to payment table
-        Payment p1 = new Payment("R-0001","123456789v", "Amal Perera", courseList, BigDecimal.valueOf(100000), BigDecimal.valueOf(30000), "1st Installement", BigDecimal.valueOf(20000), "Cash", BigDecimal.valueOf(10000), "Test");
-        Payment p2 = new Payment("R-0002","234567890v", "Kasun Sampath", courseList, BigDecimal.valueOf(200000), BigDecimal.valueOf(50000), "Registration", BigDecimal.valueOf(20000), "Back Deposit", BigDecimal.valueOf(30000), "Test");
+        Payment p1 = new Payment("R-0001","123456789v", "Amal Perera", "DEP", BigDecimal.valueOf(100000), BigDecimal.valueOf(30000), "1st Installement", BigDecimal.valueOf(20000), "Cash", BigDecimal.valueOf(10000), "Test");
+        Payment p2 = new Payment("R-0002","234567890v", "Kasun Sampath", "CMJD", BigDecimal.valueOf(200000), BigDecimal.valueOf(50000), "Registration", BigDecimal.valueOf(20000), "Back Deposit", BigDecimal.valueOf(30000), "Test");
         paymentDB.add(p1);
         paymentDB.add(p2);
     }
