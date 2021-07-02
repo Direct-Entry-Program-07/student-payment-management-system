@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 
 public class UserTM {
-    private String username;
+    private String fullname;
     private String userType;
     private String nic;
     private String address;
@@ -15,7 +15,7 @@ public class UserTM {
     }
 
     public UserTM(String username, String userType, String nic, String address, String contactNumber, String email, LocalDate joinedDate) {
-        this.username = username;
+        this.fullname = username;
         this.userType = userType;
         this.nic = nic;
         this.address = address;
@@ -24,12 +24,12 @@ public class UserTM {
         this.joinedDate = joinedDate;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUserType() {
@@ -83,7 +83,7 @@ public class UserTM {
     @Override
     public String toString() {
         return "USerTM{" +
-                "username='" + username + '\'' +
+                "username='" + fullname + '\'' +
                 ", userType='" + userType + '\'' +
                 ", nic='" + nic + '\'' +
                 ", address='" + address + '\'' +
