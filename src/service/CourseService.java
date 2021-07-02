@@ -58,16 +58,27 @@ public class CourseService {
 
                 if (course.getCourseID().equals(s)) {
                    isDuplicatedFound = true;
+                   courseDB.add(course);
+                   findDuplicatedRecord(course);
                 }
             }
 
-            if (!isDuplicatedFound){
+            if (!isDuplicatedFound){            //prevent saving the new batch as a new course
                 courseDB.add(course);
                 coursesList.add(course.getCourseID());
             }
         }
 
-        //System.out.println(coursesList);
+       // System.out.println(courseDB);
+    }
+
+    private void findDuplicatedRecord(Course course) {
+        System.out.println(course.getCourseID() + " , " + course.getSelectedBatch().getId());
+
+        for (Course course1 : courseDB) {
+
+
+        }
 
     }
 
@@ -120,14 +131,18 @@ public class CourseService {
 
             if (course.getCourseName().contains(query) ||
                     course.getCourseID().contains(query)) {
+
+                for (Course course1 : result) {
+
+                }
                 result.add(course);
             }
 
         }
         //System.out.println(result);
-        Set<Course> filteredSet = findDuplicates(result);
+       /* Set<Course> filteredSet = findDuplicates(result);
         List<Course> filteredList = new ArrayList<>(filteredSet);
-        filteredList.addAll(filteredSet);
+        filteredList.addAll(filteredSet);*/
         return result;
     }
 

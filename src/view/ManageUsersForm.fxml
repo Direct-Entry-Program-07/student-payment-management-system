@@ -34,13 +34,14 @@
         </HBox>
         <TableView fx:id="tblUsers" layoutX="24.0" layoutY="130.0" prefHeight="666.0" prefWidth="1384.0" stylesheets="@css/ManageUsersFormStyles.css">
             <columns>
-                <TableColumn prefWidth="192.0" text="Student Name" />
-                <TableColumn prefWidth="139.0" text="NIC" />
-                <TableColumn prefWidth="249.0" text="Address" />
-                <TableColumn prefWidth="194.0" text="Contact Number" />
-                <TableColumn prefWidth="264.0" text="Email Address" />
-                <TableColumn prefWidth="176.0" text="CourseID" />
-                <TableColumn prefWidth="170.0" text="Operator" />
+                <TableColumn prefWidth="192.0" text="Name" />
+                <TableColumn prefWidth="139.0" text="User Type" />
+                <TableColumn prefWidth="189.0" text="NIC" />
+                <TableColumn prefWidth="207.0" text="Address" />
+                <TableColumn prefWidth="187.0" text="Contact Number" />
+                <TableColumn prefWidth="193.0" text="Email Address" />
+                <TableColumn prefWidth="162.0" text="Joined Date" />
+            <TableColumn prefWidth="117.0" text="Opertor" />
             </columns>
         </TableView>
     </children>
