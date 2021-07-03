@@ -5,9 +5,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import util.AppBarIcon;
@@ -39,6 +37,7 @@ public class HomeFormController {
         tblDashboard.getItems().add(new Object());
         tblDashboard.getItems().add(new Object());
         tblDashboard.getItems().add(new Object());
+
     }
 
     private void GetDate() {
@@ -84,7 +83,7 @@ public class HomeFormController {
     }
 
     public void btnManageCourses_OnAction(ActionEvent actionEvent) {
-        navigate("Manage Course Details", "/view/ManageCoursesForm.fxml");
+            navigate("Manage Course Details", "/view/ManageCoursesForm.fxml");
     }
 
     public void btnManageCourses_OnKeyReleased(KeyEvent keyEvent) {
@@ -104,7 +103,12 @@ public class HomeFormController {
     }
 
     public void btnManageUsers_OnAction(ActionEvent actionEvent) {
+       // System.out.println(LoginScreenFormController.getLoggedInUser());
+        if (LoginScreenFormController.getLoggedInUser().contains("user")){
         navigate("Manage Users", "/view/ManageUsersForm.fxml");
+        }else {
+            new Alert(Alert.AlertType.INFORMATION, "Access denied! are you admin?" , ButtonType.OK).showAndWait();
+        }
     }
 
     public void btnManageUsers_OnKeyReleased(KeyEvent keyEvent) {

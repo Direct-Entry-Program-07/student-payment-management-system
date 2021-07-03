@@ -25,9 +25,20 @@ public class LoginScreenFormController {
     public TextField txtUserName;
     public AnchorPane root;
 
+    private static String loggedInUser = "";
+
+    public static String getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public static void setLoggedInUser(String loggedInUser) {
+        LoginScreenFormController.loggedInUser = loggedInUser;
+    }
+
     public void btnLogin_OnAction(ActionEvent actionEvent) throws IOException {
         if (!(txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty())){
             if (userServiceRedis.authenticate(txtUserName.getText(), txtPassword.getText())) {
+                setLoggedInUser(txtUserName.getText());
                 initializeUI();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Invalid Login credentials").showAndWait();
@@ -39,6 +50,8 @@ public class LoginScreenFormController {
             new Alert(Alert.AlertType.ERROR, "Username/password cannot be empty").showAndWait();
             txtUserName.requestFocus();
         }
+
+
 
 
     }
