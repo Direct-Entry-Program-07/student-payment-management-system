@@ -2,6 +2,8 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,12 +11,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import model.*;
-import org.apache.commons.codec.cli.Digest;
+import model.User;
+import model.UserTM;
 import org.apache.commons.codec.digest.DigestUtils;
 import service.UserService;
 
-import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 public class AddUserFormController {
     public JFXButton btnSave;
@@ -32,9 +34,17 @@ public class AddUserFormController {
     public ObservableList<String> usertypes = FXCollections.observableArrayList();
 
     public void initialize() {
+        if (LoginScreenFormController.getLoggedInUser().contains("root")) {
+            usertypes.add("root");
+            usertypes.add("admin");
+            usertypes.add("user");
+        } else if (LoginScreenFormController.getLoggedInUser().contains("admin")) {
+            usertypes.add("admin");
+            usertypes.add("user");
+        }
         Platform.runLater(() -> {
-
-            cmbUserType.setValue(usertypes);
+            cmbUserType.setPromptText("Select user type");
+            cmbUserType.setItems(usertypes);
 
             if (root.getUserData() != null) {
                 UserTM tm = (UserTM) root.getUserData();
@@ -50,16 +60,30 @@ public class AddUserFormController {
                 btnSave.setText("Update User");
             }
         });
+
+        cmbUserType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+               if (newValue == "root"){
+                   txtUsername.setText("root");
+               }else if (newValue == "admin"){
+                   txtUsername.setText("admin");
+               }else if (newValue == "user"){
+                   txtUsername.setText("user");
+               }
+            }
+        });
     }
 
     public void btnSave_OnAction(ActionEvent actionEvent) {
-        /*try {
+        try {
             if (!isValidated()) {
                 return;
             }
 
             String pwdHash = DigestUtils.sha256Hex(txtPassword.getText());
-            User user = new User(cmbUserType.selectionModelProperty().getValue().toString(),
+            System.out.println(pwdHash);
+           /* User user = new User(cmbUserType.selectionModelProperty().getValue().toString(),
                     txtFullname.getText(),
                     txtUsername.getText(),
                     txtFullname.getText(),
@@ -79,16 +103,60 @@ public class AddUserFormController {
                 tm.setCourse(cmbCourseID.getValue() + "-" + cmbBatchID.getValue());
                 studentService.updateStudent(student);
             }
-            new Alert(Alert.AlertType.NONE, "Student has been saved successfully", ButtonType.OK).show();
+            new Alert(Alert.AlertType.NONE, "Student has been saved successfully", ButtonType.OK).show(); */
 
         } catch (RuntimeException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to save the student", ButtonType.OK).show();
-        }*/
+        }
     }
 
     private boolean isValidated() {
-        return false;
+        String username = txtUsername.getText();
+        String fullname = txtFullname.getText();
+        String password = txtPassword.getText();
+        String address = txtAddress.getText();
+        String contactNumber = txtContactNumber.getText();
+        String email = txtEmail.getText();
+
+        Pattern fullNamePattern = Pattern.compile("[A-Za-z]{3,}[A-Za-z ]*");
+        Pattern mobileNumberPattern = Pattern.compile("\\d{3}-\\d{7}$");
+        Pattern addressPattern = Pattern.compile("[A-Za-z0-9 :,.-/\\\\]+");
+        Pattern emailPattern = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
+        Pattern passwordPattern = Pattern.compile("[A-Za-z0-9]{4,}");
+        if (cmbUserType.getValue() == null) {
+            new Alert(Alert.AlertType.ERROR, "Please select user type").show();
+            cmbUserType.requestFocus();
+            return false;
+        } else if (username.equals("")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid username").show();
+            txtUsername.requestFocus();
+            return false;
+        } else if (!(fullNamePattern.matcher(fullname).matches())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid name").show();
+            txtFullname.requestFocus();
+            return false;
+        } else if (!(passwordPattern.matcher(password).matches())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid password").show();
+            txtPassword.requestFocus();
+            return false;
+        } else if (!(addressPattern.matcher(address).matches())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid address").show();
+            txtAddress.requestFocus();
+            return false;
+        } else if (!(mobileNumberPattern.matcher(contactNumber).matches())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid contact number").show();
+            txtContactNumber.requestFocus();
+            return false;
+        } else if (!(emailPattern.matcher(email).matches())) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Email").show();
+            txtEmail.requestFocus();
+            return false;
+        }
+
+        return true;
+
+
     }
 
     public void btnCancel_OnAction(ActionEvent actionEvent) {

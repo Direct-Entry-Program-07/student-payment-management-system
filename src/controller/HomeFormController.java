@@ -104,7 +104,7 @@ public class HomeFormController {
 
     public void btnManageUsers_OnAction(ActionEvent actionEvent) {
        // System.out.println(LoginScreenFormController.getLoggedInUser());
-        if (LoginScreenFormController.getLoggedInUser().contains("user")){
+        if (LoginScreenFormController.getLoggedInUser().contains("admin") || LoginScreenFormController.getLoggedInUser().contains("root")){
         navigate("Manage Users", "/view/ManageUsersForm.fxml");
         }else {
             new Alert(Alert.AlertType.INFORMATION, "Access denied! are you admin?" , ButtonType.OK).showAndWait();
