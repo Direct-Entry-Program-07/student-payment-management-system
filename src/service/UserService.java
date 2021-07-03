@@ -58,8 +58,5 @@ public class UserService {
         return result;
     }
 
-    public void authenticate(String username, String password){
-        
-    }
 
 }

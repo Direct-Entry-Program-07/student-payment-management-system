@@ -6,32 +6,51 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import service.UserServiceRedisImpl;
 import util.AppBarIcon;
 
 import java.io.IOException;
 
 public class LoginScreenFormController {
+    private final UserServiceRedisImpl userServiceRedis = new UserServiceRedisImpl();
     public JFXButton btnLogin;
-    public JFXButton btnCancel;
-    public TextField txtPassword;
+    public PasswordField txtPassword;
     public TextField txtUserName;
     public AnchorPane root;
 
     public void btnLogin_OnAction(ActionEvent actionEvent) throws IOException {
+        if (!(txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty())){
+            if (userServiceRedis.authenticate(txtUserName.getText(), txtPassword.getText())) {
+                initializeUI();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Invalid Login credentials").showAndWait();
+                txtUserName.clear();
+                txtPassword.clear();
+                txtUserName.requestFocus();
+            }
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Username/password cannot be empty").showAndWait();
+            txtUserName.requestFocus();
+        }
 
 
+    }
+
+    private void initializeUI() throws IOException {
         Stage primaryStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainForm.fxml"));
         Parent root = fxmlLoader.load();
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
         MainFormController ctrl = fxmlLoader.getController();
-        ctrl.navigate("Student Management System","/view/HomeForm.fxml", AppBarIcon.NAV_ICON_HOME);
+        ctrl.navigate("Student Management System", "/view/HomeForm.fxml", AppBarIcon.NAV_ICON_HOME);
         mainScene.setUserData(ctrl);
         mainScene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -39,13 +58,9 @@ public class LoginScreenFormController {
         primaryStage.show();
         primaryStage.centerOnScreen();
 
-        Platform.runLater(()->{
-            ((Stage)(btnLogin.getScene().getWindow())).close();
+        Platform.runLater(() -> {
+            ((Stage) (btnLogin.getScene().getWindow())).close();
         });
-
     }
 
-    public void btnCancel_OnAction(ActionEvent actionEvent) {
-
-    }
 }
