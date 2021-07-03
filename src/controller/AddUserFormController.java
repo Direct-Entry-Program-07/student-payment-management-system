@@ -25,6 +25,7 @@ public class AddUserFormController {
     public TextField txtUsername;
     public TextField txtFullname;
     public TextField txtPassword;
+    public TextField txtConfirmPassword;
     public AnchorPane root;
     public TextArea txtAddress;
     public TextField txtContactNumber;
@@ -82,8 +83,8 @@ public class AddUserFormController {
             }
 
             String pwdHash = DigestUtils.sha256Hex(txtPassword.getText());
-            System.out.println(pwdHash);
-           /* User user = new User(cmbUserType.selectionModelProperty().getValue().toString(),
+           // System.out.println(pwdHash);
+            User user = new User(cmbUserType.selectionModelProperty().getValue().toString(),
                     txtFullname.getText(),
                     txtUsername.getText(),
                     txtFullname.getText(),
@@ -92,7 +93,7 @@ public class AddUserFormController {
                    txtContactNumber.getText(),
                     txtEmail.getText());
 
-            if (btnSave.getText().equals("Save User")) {
+           /* if (btnSave.getText().equals("Save User")) {
                 userService.saveUser(user);
             } else {
                 UserTM tm = (UserTM) root.getUserData();
@@ -115,6 +116,7 @@ public class AddUserFormController {
         String username = txtUsername.getText();
         String fullname = txtFullname.getText();
         String password = txtPassword.getText();
+        String confirmPassword = txtConfirmPassword.getText();
         String address = txtAddress.getText();
         String contactNumber = txtContactNumber.getText();
         String email = txtEmail.getText();
@@ -139,6 +141,10 @@ public class AddUserFormController {
         } else if (!(passwordPattern.matcher(password).matches())) {
             new Alert(Alert.AlertType.ERROR, "Invalid password").show();
             txtPassword.requestFocus();
+            return false;
+        } else if(!confirmPassword.equals(password)){
+            new Alert(Alert.AlertType.ERROR, "password not matched").show();
+            txtConfirmPassword.requestFocus();
             return false;
         } else if (!(addressPattern.matcher(address).matches())) {
             new Alert(Alert.AlertType.ERROR, "Invalid address").show();
