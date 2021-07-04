@@ -51,9 +51,6 @@ public class LoginScreenFormController {
             txtUserName.requestFocus();
         }
 
-
-
-
     }
 
     private void initializeUI() throws IOException {

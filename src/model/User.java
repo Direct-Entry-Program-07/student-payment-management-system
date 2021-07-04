@@ -3,7 +3,7 @@ package model;
 public class User {
     private String userType;
     private String username;
-    private String nic;
+  //  private String nic;
     private String fullname;
     private String password;
     private String address;
@@ -13,11 +13,11 @@ public class User {
     public User() {
     }
 
-    public User(String userType, String userId, String nic, String username, String password, String address, String contactNumber, String emailAddress) {
+    public User(String userType, String username, String fullname, String password, String address, String contactNumber, String emailAddress) {
         this.userType = userType;
-        this.username = userId;
-        this.nic = nic;
-        this.fullname = username;
+        this.username = username;
+       // this.nic = nic;
+        this.fullname = fullname;
         this.password = password;
         this.address = address;
         this.contactNumber = contactNumber;
@@ -80,21 +80,21 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-
+/*
     public String getNic() {
         return nic;
     }
 
     public void setNic(String nic) {
         this.nic = nic;
-    }
+    }*/
 
     @Override
     public String toString() {
         return "User{" +
                 "userType='" + userType + '\'' +
                 ", userId='" + username + '\'' +
-                ", nic='" + nic + '\'' +
+               // ", nic='" + nic + '\'' +
                 ", username='" + fullname + '\'' +
                 ", password='" + password + '\'' +
                 ", address='" + address + '\'' +

@@ -15,6 +15,7 @@ import model.User;
 import model.UserTM;
 import org.apache.commons.codec.digest.DigestUtils;
 import service.UserService;
+import service.UserServiceRedisImpl;
 
 import java.util.regex.Pattern;
 
@@ -31,7 +32,7 @@ public class AddUserFormController {
     public TextField txtContactNumber;
     public TextField txtEmail;
 
-    public UserService userService = new UserService();
+    public UserServiceRedisImpl userService = new UserServiceRedisImpl();
     public ObservableList<String> usertypes = FXCollections.observableArrayList();
 
     public void initialize() {
@@ -72,6 +73,8 @@ public class AddUserFormController {
                }else if (newValue == "user"){
                    txtUsername.setText("user");
                }
+
+              //  System.out.println(cmbUserType.getValue());
             }
         });
     }
@@ -83,9 +86,8 @@ public class AddUserFormController {
             }
 
             String pwdHash = DigestUtils.sha256Hex(txtPassword.getText());
-           // System.out.println(pwdHash);
-            User user = new User(cmbUserType.selectionModelProperty().getValue().toString(),
-                    txtFullname.getText(),
+           //System.out.println(pwdHash);
+            User user = new User((String) cmbUserType.getValue(),
                     txtUsername.getText(),
                     txtFullname.getText(),
                     pwdHash,
@@ -93,18 +95,18 @@ public class AddUserFormController {
                    txtContactNumber.getText(),
                     txtEmail.getText());
 
-           /* if (btnSave.getText().equals("Save User")) {
+            if (btnSave.getText().equals("Save User")) {
                 userService.saveUser(user);
-            } else {
+           /* } else {
                 UserTM tm = (UserTM) root.getUserData();
                 tm.setUserType((String) cmbUserType.getValue());
                 tm.setNic(txt.getText());
                 tm.setContactNumber(txtContactNumber.getText());
                 tm.setEmailAddress(txtEmailAddress.getText());
                 tm.setCourse(cmbCourseID.getValue() + "-" + cmbBatchID.getValue());
-                studentService.updateStudent(student);
+                studentService.updateStudent(student);*/
             }
-            new Alert(Alert.AlertType.NONE, "Student has been saved successfully", ButtonType.OK).show(); */
+            new Alert(Alert.AlertType.NONE, "Student has been saved successfully", ButtonType.OK).show();
 
         } catch (RuntimeException e) {
             e.printStackTrace();

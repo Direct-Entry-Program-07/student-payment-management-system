@@ -17,6 +17,7 @@ public class UserService {
     }
 
     public void saveUser(User user){
+
         userDB.add(user);
     }
 
@@ -34,9 +35,9 @@ public class UserService {
 
     public User findUser(String nic){
         for (User user : userDB) {
-            if (user.getNic().equals(nic)){
+           /* if (user.getNic().equals(nic)){
                 return user;
-            }
+            }*/
         }
         return null;
     }
@@ -47,7 +48,7 @@ public class UserService {
         for (User user: userDB) {
 
             if (user.getFullname().contains(query) ||
-                    user.getNic().contains(query) ||
+                  //  user.getNic().contains(query) ||
                     user.getAddress().contains(query) ||
                     user.getContactNumber().contains(query) ||
                     user.getEmailAddress().contains(query) ||

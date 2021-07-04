@@ -167,7 +167,7 @@
                 </HBox>
             </children>
         </VBox>
-        <JFXButton fx:id="btnSave" layoutX="460.0" layoutY="722.0" onAction="#btnSave_OnAction" prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Save">
+        <JFXButton fx:id="btnSave" layoutX="460.0" layoutY="722.0" onAction="#btnSave_OnAction" prefHeight="51.0" prefWidth="172.0" style="-fx-background-color: #B3E5FC;" text="Save User">
             <font>
                 <Font size="20.0" />
             </font>
