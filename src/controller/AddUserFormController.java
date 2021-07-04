@@ -14,7 +14,6 @@ import javafx.stage.Window;
 import model.User;
 import model.UserTM;
 import org.apache.commons.codec.digest.DigestUtils;
-import service.UserService;
 import service.UserServiceRedisImpl;
 
 import java.util.regex.Pattern;
@@ -50,7 +49,7 @@ public class AddUserFormController {
 
             if (root.getUserData() != null) {
                 UserTM tm = (UserTM) root.getUserData();
-                User user = userService.findUser(tm.getNic());
+                User user = userService.findUser(tm.getUsername());
 
                 // cmbUserType.setItems();
                 txtUsername.setText(user.getUsername());
@@ -80,6 +79,7 @@ public class AddUserFormController {
     }
 
     public void btnSave_OnAction(ActionEvent actionEvent) {
+
         try {
             if (!isValidated()) {
                 return;
@@ -98,14 +98,13 @@ public class AddUserFormController {
             if (btnSave.getText().equals("Save User")) {
                 userService.saveUser(user);
             } else {
-                UserTM tm = (UserTM) root.getUserData();
-                System.out.println(tm);
-               /* tm.setUserType((String) cmbUserType.getValue());
-                tm.setNic(txt.getText());
+               /* UserTM tm = (UserTM) root.getUserData();
+                tm.setUserType((String) cmbUserType.getValue());
+                tm.setFullname(txtFullname.getText());
                 tm.setContactNumber(txtContactNumber.getText());
                 tm.setEmailAddress(txtEmailAddress.getText());
                 tm.setCourse(cmbCourseID.getValue() + "-" + cmbBatchID.getValue());
-                studentService.updateStudent(student);*/
+                userService.updateUser(user);*/
             }
             new Alert(Alert.AlertType.NONE, "User has been saved successfully", ButtonType.OK).show();
 

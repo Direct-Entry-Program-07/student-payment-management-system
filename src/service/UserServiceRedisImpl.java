@@ -7,10 +7,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import redis.clients.jedis.Jedis;
 import util.JedisClient;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 public class UserServiceRedisImpl {
     private static final String DB_PREFIX = "#u";
@@ -41,7 +39,6 @@ public class UserServiceRedisImpl {
             client.hset(key, userInfo);
         }
 
-
     }
 
     public void updateUser(User user) {
@@ -58,7 +55,64 @@ public class UserServiceRedisImpl {
     }
 
     public List<User> findUsers(String query) {
-        return null;
+        Long noOfUsers = client.dbSize();
+        Set<String> allKeys = new HashSet<>();
+        List<User> result = new ArrayList<>();
+        User user = new User();
+
+
+        String fullname;
+        String usertype;
+        String address;
+        String contactNumber;
+        String email;
+
+        if (allKeys.isEmpty()){
+            allKeys.add(client.randomKey());
+        }
+
+        loop1:
+        for (int i = 0; i < noOfUsers; i++) {
+            String s = client.randomKey();
+            loop2:
+            for (String key : allKeys) {
+                if (key.equals(s)){
+                    continue loop2;
+                }
+            }
+            allKeys.add(s);
+        }
+       // System.out.println("ALL" + allKeys);
+
+
+
+        for (String key : allKeys) {
+            fullname = client.hget(key, "fullname");
+            usertype = client.hget(key, "usertype");
+            address = client.hget(key, "address");
+            contactNumber = client.hget(key, "contact-number");
+            email = client.hget(key, "email");
+
+            if (fullname.contains(query) ||
+                usertype.contains(query) ||
+                address.contains(query) ||
+                contactNumber.contains(query) ||
+                email.contains(query)){
+
+                user.setFullname(fullname);
+                user.setUserType(usertype);
+                user.setUsername("DATA");
+                user.setPassword("DATA");
+                user.setAddress(address);
+                user.setContactNumber(contactNumber);
+                user.setEmailAddress(email);
+                user.setJoinedDate(LocalDate.now());
+
+                result.add(user);
+            }
+
+        }
+        return result;
     }
 
     public User findUser(String nic) {

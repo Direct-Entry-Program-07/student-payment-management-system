@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class UserTM {
     private String fullname;
     private String userType;
-    private String nic;
+    private String username;
     private String address;
     private String contactNumber;
     private String email;
@@ -14,10 +14,10 @@ public class UserTM {
     public UserTM() {
     }
 
-    public UserTM(String username, String userType, String nic, String address, String contactNumber, String email, LocalDate joinedDate) {
-        this.fullname = username;
+    public UserTM(String fullname, String userType, String username, String address, String contactNumber, String email, LocalDate joinedDate) {
+        this.fullname = fullname;
         this.userType = userType;
-        this.nic = nic;
+        this.username = username;
         this.address = address;
         this.contactNumber = contactNumber;
         this.email = email;
@@ -40,12 +40,12 @@ public class UserTM {
         this.userType = userType;
     }
 
-    public String getNic() {
-        return nic;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNic(String nic) {
-        this.nic = nic;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getAddress() {
@@ -85,7 +85,7 @@ public class UserTM {
         return "USerTM{" +
                 "username='" + fullname + '\'' +
                 ", userType='" + userType + '\'' +
-                ", nic='" + nic + '\'' +
+                ", nic='" + username + '\'' +
                 ", address='" + address + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
                 ", email='" + email + '\'' +

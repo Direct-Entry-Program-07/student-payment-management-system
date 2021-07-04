@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class User {
     private String userType;
     private String username;
@@ -9,6 +11,7 @@ public class User {
     private String address;
     private String contactNumber;
     private String emailAddress;
+    private LocalDate joinedDate;
 
     public User() {
     }
@@ -80,26 +83,25 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-/*
-    public String getNic() {
-        return nic;
+    public LocalDate getJoinedDate() {
+        return LocalDate.now();
     }
 
-    public void setNic(String nic) {
-        this.nic = nic;
-    }*/
+    public void setJoinedDate(LocalDate joinedDate) {
+        this.joinedDate = joinedDate;
+    }
 
     @Override
     public String toString() {
         return "User{" +
                 "userType='" + userType + '\'' +
-                ", userId='" + username + '\'' +
-               // ", nic='" + nic + '\'' +
-                ", username='" + fullname + '\'' +
+                ", username='" + username + '\'' +
+                ", fullname='" + fullname + '\'' +
                 ", password='" + password + '\'' +
                 ", address='" + address + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
+                ", joinedDate=" + joinedDate +
                 '}';
     }
 }
