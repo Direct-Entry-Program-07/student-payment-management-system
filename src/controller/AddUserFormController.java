@@ -106,11 +106,11 @@ public class AddUserFormController {
                 tm.setCourse(cmbCourseID.getValue() + "-" + cmbBatchID.getValue());
                 studentService.updateStudent(student);*/
             }
-            new Alert(Alert.AlertType.NONE, "Student has been saved successfully", ButtonType.OK).show();
+            new Alert(Alert.AlertType.NONE, "User has been saved successfully", ButtonType.OK).show();
 
         } catch (RuntimeException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Failed to save the student", ButtonType.OK).show();
+            new Alert(Alert.AlertType.ERROR, "Failed to save the user", ButtonType.OK).show();
         }
     }
 

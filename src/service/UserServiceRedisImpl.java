@@ -25,23 +25,23 @@ public class UserServiceRedisImpl {
 
     public void saveUser(User user) {
         if (!client.exists(DB_PREFIX + user.getUsername())) {
+           // System.out.println(DB_PREFIX + user.getUsername());
+            //System.out.println(user.getPassword());
 
+            String key = DB_PREFIX + user.getUsername();
+            Map<String, String> userInfo = new HashMap<>();
+
+            userInfo.put("usertype", user.getUserType());
+            userInfo.put("fullname", user.getFullname());
+            userInfo.put("password", user.getPassword());
+            userInfo.put("address", user.getAddress());
+            userInfo.put("contact-number", user.getContactNumber());
+            userInfo.put("email", user.getEmailAddress());
+
+            client.hset(key, userInfo);
         }
 
-        System.out.println(DB_PREFIX + user.getUsername());
-        System.out.println(user.getPassword());
 
-        String key = DB_PREFIX + user.getUsername();
-        Map<String, String> userInfo = new HashMap<>();
-
-        userInfo.put("usertype", user.getUserType());
-        userInfo.put("fullname", user.getFullname());
-        userInfo.put("password", user.getPassword());
-        userInfo.put("address", user.getAddress());
-        userInfo.put("contact-number", user.getContactNumber());
-        userInfo.put("email", user.getEmailAddress());
-
-        client.hset(key, userInfo);
     }
 
     public void updateUser(User user) {
