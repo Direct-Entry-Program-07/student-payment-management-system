@@ -97,9 +97,10 @@ public class AddUserFormController {
 
             if (btnSave.getText().equals("Save User")) {
                 userService.saveUser(user);
-           /* } else {
+            } else {
                 UserTM tm = (UserTM) root.getUserData();
-                tm.setUserType((String) cmbUserType.getValue());
+                System.out.println(tm);
+               /* tm.setUserType((String) cmbUserType.getValue());
                 tm.setNic(txt.getText());
                 tm.setContactNumber(txtContactNumber.getText());
                 tm.setEmailAddress(txtEmailAddress.getText());
