@@ -17,6 +17,15 @@ This System is built using Java and JavaFX with In-memory database.
 
 5. Build and Run!
 
+For Testing Purposes use following login credentials:
+
+    Root --> username - root001, password - root
+
+    Admin --> username - admin001, password - 1234
+
+    User --> username - user001, password - 1234
+
+
 ### Resources
 
 Prototype can be found here in [Figma](https://www.figma.com/file/qfhPahDQcox7aLADWz6Hdi/Assignment2_Prototype?node-id=0%3A1)
