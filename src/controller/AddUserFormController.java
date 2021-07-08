@@ -48,8 +48,14 @@ public class AddUserFormController {
             cmbUserType.setItems(usertypes);
 
             if (root.getUserData() != null) {
+                txtUsername.setEditable(false);
+               // txtPassword.setEditable(false);
+                txtPassword.setDisable(true);
+                txtConfirmPassword.setDisable(true);
+
                 UserTM tm = (UserTM) root.getUserData();
                 User user = userService.findUser(tm.getUsername());
+                System.out.println(user);
 
                 // cmbUserType.setItems();
                 txtUsername.setText(user.getUsername());

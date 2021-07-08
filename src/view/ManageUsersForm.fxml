@@ -36,7 +36,7 @@
             <columns>
                 <TableColumn prefWidth="192.0" text="Name" />
                 <TableColumn prefWidth="139.0" text="User Type" />
-                <TableColumn prefWidth="189.0" text="NIC" />
+                <TableColumn prefWidth="189.0" text="Username" />
                 <TableColumn prefWidth="207.0" text="Address" />
                 <TableColumn prefWidth="187.0" text="Contact Number" />
                 <TableColumn prefWidth="193.0" text="Email Address" />

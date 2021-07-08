@@ -7,11 +7,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,6 +21,7 @@ import util.AppBarIcon;
 import util.MaterialUI;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Set;
 
 public class ManageUsersFormController {
@@ -60,9 +60,58 @@ public class ManageUsersFormController {
         tblUsers.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("contactNumber"));
         tblUsers.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("email"));
         tblUsers.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("joinedDate"));
+        TableColumn<UserTM, HBox> operatorCol = (TableColumn<UserTM, HBox>) tblUsers.getColumns().get(7);
+
+        operatorCol.setCellValueFactory(param -> {
+            ImageView imgEdit = new ImageView("/view/assets/icons/Edit.png");
+            ImageView imgTrash = new ImageView("/view/assets/icons/Trash.png");
+
+            imgEdit.getStyleClass().add("action-icons");
+            imgTrash.getStyleClass().add("action-icons");
+
+            imgEdit.setOnMouseClicked(event -> updateUser(param.getValue()));
+            imgTrash.setOnMouseClicked(event -> deleteUser(param.getValue()));
+
+            return new ReadOnlyObjectWrapper<>(new HBox(10, imgEdit, imgTrash));
+        });
 
         LoadAllUsers("");
 
+    }
+
+    private void deleteUser(UserTM tm) {
+        try {
+            Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this user?", ButtonType.YES, ButtonType.NO).showAndWait();
+            if (buttonType.get() == ButtonType.YES) {
+                userService.deleteUser(tm.getUsername());
+                tblUsers.getItems().remove(tm);
+            }
+        } catch (RuntimeException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to delete the item", ButtonType.OK).show();
+        }
+    }
+
+    private void updateUser(UserTM tm) {
+        try {
+            Stage secondaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/SecondaryMainForm.fxml"));
+            Scene secondaryScene = new Scene(loader.load());
+            SecondaryMainFormController ctrl = loader.getController();
+
+            secondaryStage.setScene(secondaryScene);
+            secondaryScene.setFill(Color.TRANSPARENT);
+            secondaryStage.initStyle(StageStyle.TRANSPARENT);
+            secondaryStage.initModality(Modality.WINDOW_MODAL);
+            secondaryStage.initOwner(txtQuery.getScene().getWindow());
+            secondaryStage.setTitle("Update User");
+            secondaryStage.centerOnScreen();
+            ctrl.navigate("Update User", "/view/AddUserForm.fxml", AppBarIcon.NAV_ICON_NONE, null, tm);
+
+            secondaryStage.showAndWait();
+            tblUsers.refresh();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void LoadAllUsers(String query) {

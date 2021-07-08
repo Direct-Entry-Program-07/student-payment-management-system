@@ -1,7 +1,5 @@
 package service;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import model.User;
 import org.apache.commons.codec.digest.DigestUtils;
 import redis.clients.jedis.Jedis;
@@ -23,7 +21,7 @@ public class UserServiceRedisImpl {
 
     public void saveUser(User user) {
         if (!client.exists(DB_PREFIX + user.getUsername())) {
-           // System.out.println(DB_PREFIX + user.getUsername());
+            // System.out.println(DB_PREFIX + user.getUsername());
             //System.out.println(user.getPassword());
 
             String key = DB_PREFIX + user.getUsername();
@@ -35,6 +33,7 @@ public class UserServiceRedisImpl {
             userInfo.put("address", user.getAddress());
             userInfo.put("contact-number", user.getContactNumber());
             userInfo.put("email", user.getEmailAddress());
+            userInfo.put("joined-date", String.valueOf(user.getJoinedDate()));
 
             client.hset(key, userInfo);
         }
@@ -45,7 +44,7 @@ public class UserServiceRedisImpl {
 
     }
 
-    public void deleteUser(String nic) {
+    public void deleteUser(String username) {
 
     }
 
@@ -66,8 +65,9 @@ public class UserServiceRedisImpl {
         String address;
         String contactNumber;
         String email;
+        String joinedDate;
 
-        if (allKeys.isEmpty()){
+        if (allKeys.isEmpty()) {
             allKeys.add(client.randomKey());
         }
 
@@ -76,14 +76,13 @@ public class UserServiceRedisImpl {
             String s = client.randomKey();
             loop2:
             for (String key : allKeys) {
-                if (key.equals(s)){
+                if (key.equals(s)) {
                     continue loop2;
                 }
             }
             allKeys.add(s);
         }
-       // System.out.println("ALL" + allKeys);
-
+        // System.out.println("ALL" + allKeys);
 
 
         for (String key : allKeys) {
@@ -92,21 +91,23 @@ public class UserServiceRedisImpl {
             address = client.hget(key, "address");
             contactNumber = client.hget(key, "contact-number");
             email = client.hget(key, "email");
+          //  joinedDate = client.hget(key, "joined-date");
 
-            if (fullname.contains(query) ||
-                usertype.contains(query) ||
-                address.contains(query) ||
-                contactNumber.contains(query) ||
-                email.contains(query)){
+            if (    fullname.contains(query) ||
+                    address.contains(query) ||
+                    key.contains(query) ||
+                    contactNumber.contains(query) ||
+                    email.contains(query)) {
+
+                String[] split = key.split("#u");
 
                 user.setFullname(fullname);
                 user.setUserType(usertype);
-                user.setUsername("DATA");
-                user.setPassword("DATA");
+                user.setUsername(split[1]);
                 user.setAddress(address);
                 user.setContactNumber(contactNumber);
                 user.setEmailAddress(email);
-                user.setJoinedDate(LocalDate.now());
+              //  user.setJoinedDate(LocalDate.parse(joinedDate));
 
                 result.add(user);
             }
@@ -115,13 +116,27 @@ public class UserServiceRedisImpl {
         return result;
     }
 
-    public User findUser(String nic) {
-        for (User user : userDB) {
-          /*  if (user.getNic().equals(nic)) {
-                return user;
-            }*/
-        }
-        return null;
+    public User findUser(String username) {
+        String fullname;
+        String usertype;
+        String address;
+        String contactNumber;
+        String email;
+        String joinedDate;
+        String key = DB_PREFIX + username;
+
+       if (!client.exists(key)){
+           return null;
+       }
+        usertype = client.hget(key, "usertype");
+        fullname = client.hget(key, "fullname");
+        usertype = client.hget(key, "usertype");
+        address = client.hget(key, "address");
+        contactNumber = client.hget(key, "contact-number");
+        email = client.hget(key, "email");
+
+        User user = new User(usertype, username, fullname, "", address, contactNumber, email);
+        return user;
     }
 
     public boolean authenticate(String username, String inputPw) {
@@ -133,9 +148,9 @@ public class UserServiceRedisImpl {
             return false;
         }
 
-            originalPwdHash = client.hget(DB_PREFIX + username, "password");
-            System.out.println(originalPwdHash);
-            pwdHash = DigestUtils.sha256Hex(inputPw);
+        originalPwdHash = client.hget(DB_PREFIX + username, "password");
+        System.out.println(originalPwdHash);
+        pwdHash = DigestUtils.sha256Hex(inputPw);
 
         return (originalPwdHash.equals(pwdHash));
     }
