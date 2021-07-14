@@ -1,5 +1,6 @@
 package service;
 
+import javafx.scene.control.Alert;
 import model.User;
 import org.apache.commons.codec.digest.DigestUtils;
 import redis.clients.jedis.Jedis;
@@ -53,7 +54,7 @@ public class UserServiceRedisImpl {
         return userDB;
     }
 
-    public List<User> findUsers(String query) {
+    public List<User> findUsers(String query){
         Long noOfUsers = client.dbSize();
         Set<String> allKeys = new HashSet<>();
         List<User> result = new ArrayList<>();
@@ -67,23 +68,20 @@ public class UserServiceRedisImpl {
         String email;
         String joinedDate;
 
-        if (allKeys.isEmpty()) {
+        String selectedRandomKey = "";
+
+        /*if (allKeys.isEmpty()) {
             allKeys.add(client.randomKey());
-        }
+            //System.out.println(allKeys);
+        }*/
 
-        loop1:
-        for (int i = 0; i < noOfUsers; i++) {
-            String s = client.randomKey();
-            loop2:
-            for (String key : allKeys) {
-                if (key.equals(s)) {
-                    continue loop2;
-                }
+        int count = 0;
+        while (count< noOfUsers){
+            selectedRandomKey = client.randomKey();
+            if (allKeys.add(selectedRandomKey)){
+                count++;
             }
-            allKeys.add(s);
         }
-        // System.out.println("ALL" + allKeys);
-
 
         for (String key : allKeys) {
             fullname = client.hget(key, "fullname");
@@ -99,21 +97,21 @@ public class UserServiceRedisImpl {
                     contactNumber.contains(query) ||
                     email.contains(query)) {
 
+
                 String[] split = key.split("#u");
+                User u = new User();
+                u.setFullname(fullname);
+                u.setUserType(usertype);
+                u.setUsername(split[1]);
+                u.setAddress(address);
+                u.setContactNumber(contactNumber);
+                u.setEmailAddress(email);
 
-                user.setFullname(fullname);
-                user.setUserType(usertype);
-                user.setUsername(split[1]);
-                user.setAddress(address);
-                user.setContactNumber(contactNumber);
-                user.setEmailAddress(email);
-              //  user.setJoinedDate(LocalDate.parse(joinedDate));
-
-                result.add(user);
+                result.add(u);
             }
-
         }
         return result;
+
     }
 
     public User findUser(String username) {

@@ -37,7 +37,8 @@ public class ManageUsersFormController {
         MaterialUI.paintTextFields(txtQuery);
 
         tblUsers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("fullname"));
-        TableColumn<UserTM, ComboBox> userTypeCombo = (TableColumn<UserTM, ComboBox>) tblUsers.getColumns().get(1);
+        tblUsers.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("userType"));
+        /*TableColumn<UserTM, ComboBox> userTypeCombo = (TableColumn<UserTM, ComboBox>) tblUsers.getColumns().get(1);
         userTypeCombo.setCellValueFactory(param -> {
             ComboBox<String> cmbBatch = new ComboBox();
             cmbBatch.setPrefWidth(tblUsers.getColumns().get(1).getWidth());
@@ -53,7 +54,7 @@ public class ManageUsersFormController {
             });
 
             return new ReadOnlyObjectWrapper<>(cmbBatch);
-        });
+        });*/
 
         tblUsers.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("username"));
         tblUsers.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("address"));

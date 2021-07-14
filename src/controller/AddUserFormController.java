@@ -16,6 +16,7 @@ import model.UserTM;
 import org.apache.commons.codec.digest.DigestUtils;
 import service.UserServiceRedisImpl;
 
+import java.lang.invoke.SwitchPoint;
 import java.util.regex.Pattern;
 
 public class AddUserFormController {
@@ -55,9 +56,20 @@ public class AddUserFormController {
 
                 UserTM tm = (UserTM) root.getUserData();
                 User user = userService.findUser(tm.getUsername());
-                System.out.println(user);
+               // System.out.println(user);
 
                 // cmbUserType.setItems();
+                switch (user.getUserType()){
+                    case ("root"): cmbUserType.getSelectionModel().select(0);
+                    break;
+
+                    case ("admin"): cmbUserType.getSelectionModel().select(1);
+                    break;
+
+                    case ("user"): cmbUserType.getSelectionModel().select(2);
+                    break;
+                }
+
                 txtUsername.setText(user.getUsername());
                 txtFullname.setText(user.getFullname());
                 txtAddress.setText(user.getAddress());
@@ -134,6 +146,7 @@ public class AddUserFormController {
         Pattern addressPattern = Pattern.compile("[A-Za-z0-9 :,.-/\\\\]+");
         Pattern emailPattern = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
         Pattern passwordPattern = Pattern.compile("[A-Za-z0-9]{4,}");
+
         if (cmbUserType.getValue() == null) {
             new Alert(Alert.AlertType.ERROR, "Please select user type").show();
             cmbUserType.requestFocus();
@@ -146,11 +159,11 @@ public class AddUserFormController {
             new Alert(Alert.AlertType.ERROR, "Invalid name").show();
             txtFullname.requestFocus();
             return false;
-        } else if (!(passwordPattern.matcher(password).matches())) {
+        } else if (!(passwordPattern.matcher(password).matches()) && btnSave.getText().equals("Save User")) {
             new Alert(Alert.AlertType.ERROR, "Invalid password").show();
             txtPassword.requestFocus();
             return false;
-        } else if(!confirmPassword.equals(password)){
+        } else if(!confirmPassword.equals(password) && btnSave.getText().equals("Save User")){
             new Alert(Alert.AlertType.ERROR, "password not matched").show();
             txtConfirmPassword.requestFocus();
             return false;
