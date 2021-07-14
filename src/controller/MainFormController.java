@@ -7,6 +7,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -20,6 +21,9 @@ import java.io.IOException;
 
 public class MainFormController {
 
+    public Label lblName;
+    public ImageView imgUserProf;
+    public AnchorPane pneUserProfile;
     private int sessionStatus = 0;
 
     public AnchorPane pneAppBar;
@@ -105,6 +109,7 @@ public class MainFormController {
 
         Platform.runLater(() -> {
             lblTitle.setText(((Stage) (imgClose.getScene().getWindow())).getTitle());
+            lblName.setText("Welcome " + LoginScreenFormController.getloggedInUserName());
         });
 
         pneAppBar.setOnMousePressed(event -> {
@@ -152,5 +157,11 @@ public class MainFormController {
 
     public void setSessionStatus(int sessionStatus) {
         this.sessionStatus = sessionStatus;
+    }
+
+    public void imgUserProf_MouseClicked(MouseEvent mouseEvent) {
+    }
+
+    public void pneUserProfile_OnMouseClicked(MouseEvent mouseEvent) {
     }
 }

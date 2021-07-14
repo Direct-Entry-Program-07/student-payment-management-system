@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.User;
 import service.UserServiceRedisImpl;
 import util.AppBarIcon;
 
@@ -26,6 +27,7 @@ public class LoginScreenFormController {
     public AnchorPane root;
 
     private static String loggedInUser = "";
+    private static String loggedInUserName = "";
 
     public static String getLoggedInUser() {
         return loggedInUser;
@@ -35,10 +37,21 @@ public class LoginScreenFormController {
         LoginScreenFormController.loggedInUser = loggedInUser;
     }
 
+    public static String getloggedInUserName() {
+        return loggedInUserName;
+    }
+
+    public static void setloggedInUserName(String loggedInUserName) {
+        LoginScreenFormController.loggedInUserName = loggedInUserName;
+    }
+
     public void btnLogin_OnAction(ActionEvent actionEvent) throws IOException {
         if (!(txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty())){
             if (userServiceRedis.authenticate(txtUserName.getText(), txtPassword.getText())) {
                 setLoggedInUser(txtUserName.getText());
+                User user = userServiceRedis.findUser(txtUserName.getText());
+                String[] name = user.getFullname().split(" ");
+                loggedInUserName = name[0];
                 initializeUI();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Invalid Login credentials").showAndWait();
@@ -50,7 +63,6 @@ public class LoginScreenFormController {
             new Alert(Alert.AlertType.ERROR, "Username/password cannot be empty").showAndWait();
             txtUserName.requestFocus();
         }
-
     }
 
     private void initializeUI() throws IOException {

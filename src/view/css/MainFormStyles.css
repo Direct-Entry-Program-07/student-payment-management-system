@@ -1,5 +1,5 @@
 .menu:hover, .menu:focused{
-    -fx-border-color: #8b00ee;
+    -fx-border-color: #03A9F4;
     -fx-border-radius: 5px;
     -fx-cursor: hand;
 }
@@ -13,4 +13,11 @@
     -fx-font-weight: 500;
     -fx-text-fill: white;
     -fx-font-family: Ubuntu;
+}
+
+#pneUserProfile:hover{
+    -fx-border-color: white;
+    -fx-background-color: #03A9F4;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
 }

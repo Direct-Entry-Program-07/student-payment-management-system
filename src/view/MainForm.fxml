@@ -37,6 +37,16 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ImageView>
+            <AnchorPane fx:id="pneUserProfile" layoutX="1072.0" layoutY="7.0" onMouseClicked="#pneUserProfile_OnMouseClicked" prefHeight="65.0" prefWidth="282.0" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  <Label id="title" fx:id="lblName" alignment="CENTER" prefHeight="25.0" prefWidth="184.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="20.0" />
+                  <ImageView fx:id="imgUserProf" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#imgUserProf_MouseClicked" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@assets/icons/profile_bg.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="pneStage" layoutY="81.0" prefHeight="818.0" prefWidth="1438.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="81.0">
